@@ -1,0 +1,18 @@
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 0;
+}
+
+.carousel-track {
+  display: flex;
+  width: calc(100%);
+  will-change: transform;
+}
+
+.carousel-slide {
+  box-sizing: border-box;
+  border: 1px solid #000;
+}
