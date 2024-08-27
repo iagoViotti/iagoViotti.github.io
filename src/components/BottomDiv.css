@@ -1,0 +1,37 @@
+#bottom-div {
+  border: 10px solid;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.bottom-div-none {
+  color: var(--color-red);
+  transition: 0.5s;
+  margin: 2%;
+  height: 30%;
+  width: 96%;
+}
+
+.bottom-div-profile-div {
+  color: var(--color-blue);
+  transition: 0.35s;
+  margin: 0 0 0 65%;
+  height: 40%;
+  width: 35%;
+}
+
+.bottom-div-bottom-div {
+  transition: 0.5s;
+  margin: 0%;
+  height: 75%;
+  width: 100%;
+}
+
+.bottom-div-side-div {
+  transition: 0.3s;
+  margin: 0 65% 0 0;
+  height: 40%;
+  width: 35%;
+}
