@@ -17,9 +17,11 @@ const Profile = () => {
             onMouseEnter={() => setDivMode('profile-div')}
             onMouseLeave={() => setDivMode('none')}
           >
-            <h1>
-              Opened
-            </h1>
+            <div
+              className='profile-div-content'
+            >
+              Profile Div Content
+            </div>
           </div>
         ) :
           (

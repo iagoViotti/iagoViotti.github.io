@@ -2,14 +2,15 @@ import { useDivMode } from './context/DivContext'
 import { useEffect } from 'react'
 import Profile from './components/Profile'
 import BottomDiv from './components/BottomDiv'
+import SideDiv from './components/SideDiv'
 import './App.css'
 
 
 function App() {
   const { divMode } = useDivMode()
   
-  // a useeffect to track the divmode state and rerender in case the divmode changes
   useEffect(() => {
+    // a useeffect to track the divmode state and rerender in case the divmode changes
     console.log('DIVMODE (from app):', divMode)
   }, [divMode])
 
@@ -20,12 +21,7 @@ function App() {
       className={`app-grid-${divMode}`}
     >
       <Profile />
-      <div
-        id='side-div'
-        className={`side-div-${divMode}`}
-      >
-        Side-div
-      </div>
+      <SideDiv />
       <BottomDiv />
     </div>
   )

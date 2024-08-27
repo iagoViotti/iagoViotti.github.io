@@ -2,22 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import './ProfileCarousel.css';
 
 const ProfileCarousel: React.FC = () => {
-  const images = [
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
-    'Profile',
+  const words = [
+    'Perfil','Perfil','Perfil','Perfil','Perfil',
+    'Perfil','Perfil','Perfil','Perfil','Perfil',
+    'Perfil','Perfil','Perfil','Perfil','Perfil',
   ];
 
   const trackRef = useRef<HTMLDivElement>(null);
@@ -28,7 +16,7 @@ const ProfileCarousel: React.FC = () => {
 
     let start = Date.now();
     let animationFrameId: number;
-    const duration = 15 * 1000; // 20 seconds for full scroll
+    const duration = 60 * 1000; 
 
     const animate = () => {
       const now = Date.now();
@@ -39,7 +27,7 @@ const ProfileCarousel: React.FC = () => {
       }
 
       const percentage = (elapsed % duration) / duration;
-      track.style.transform = `translateX(${-percentage * 200}%)`;
+      track.style.transform = `translateX(${-percentage * 1000}%)`;
 
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -54,7 +42,7 @@ const ProfileCarousel: React.FC = () => {
   return (
     <div className="carousel">
       <div className="carousel-track" ref={trackRef}>
-        {images.concat(images).map((image, index) => (
+        {words.concat(words).map((image, index) => (
           <div className="carousel-slide" key={index}>
             <h1>
               {image}
