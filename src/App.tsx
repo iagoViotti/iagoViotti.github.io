@@ -1,12 +1,10 @@
+import Scene from './components/Scene'
 import './App.css'
-
 
 function App() {
   return (
-    <div
-      className="App"
-    >
-      App
+    <div>
+      <Scene />
     </div>
   )
 }

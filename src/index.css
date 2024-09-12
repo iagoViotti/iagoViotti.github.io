@@ -38,7 +38,8 @@ a:hover {
 }
 
 body {
-  margin: 1em;
+  margin: 0;
+  padding: 0;
   width: calc(100% - 2em);
   height: calc(100vh - 2em);
 }
