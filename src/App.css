@@ -1,0 +1,35 @@
+.canvas-container {
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+}
+
+.app {
+  height: 300vh;
+  width: 100vw;
+  backdrop-filter: blur(100px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.page-section {
+  height: 100vh;
+  width: 100vw;
+  color: black;
+}
+
+#home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+::-webkit-scrollbar {
+  background: rgba(255, 255, 255, 0.5);
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(216, 216, 216);
+  border-radius: 100px;
+}
