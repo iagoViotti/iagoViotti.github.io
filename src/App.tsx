@@ -1,9 +1,12 @@
 import Scene from './components/Scene'
 import './App.css'
+import { Provider } from './context/Context'
 
 function App() {
   return (
-    <Scene />
+    <Provider>
+      <Scene />
+    </Provider>
   )
 }
 

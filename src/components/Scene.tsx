@@ -1,11 +1,12 @@
 import { Canvas, useFrame } from '@react-three/fiber'
-import { PerspectiveCamera, Scroll, ScrollControls, ScrollControlsState, useScroll } from '@react-three/drei'
+import { PerspectiveCamera, Scroll, ScrollControls, useScroll } from '@react-three/drei'
 import { useEffect, useState, useRef } from 'react'
 import * as THREE from 'three';
 import CameraControls from './CameraControls'
 import { SphereType } from '../types/Index'
 import Home from './Home';
 import Aside from './Aside';
+import { useSection } from '../context/Context';
 
 
 const Scene = () => {
@@ -13,20 +14,20 @@ const Scene = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   // const [page, setPage] = useState(0);
-  
-  const AnimatedSpheres = ({ spheres }: { spheres: SphereType[]}) => {
+  const { homeRef, aboutRef, portfolioRef, contactRef } = useSection();
+
+  const AnimatedSpheres = ({ spheres }: { spheres: SphereType[] }) => {
     const sphereRefs = useRef<(THREE.Mesh | null)[]>([]);
     const data = useScroll();
 
-    
     useFrame(() => {
-      // const f = data.visible(0, 1/3);
+      // const f = data.visible(0, 1/4);
+      // if (data.visible(0, 1/4)) setSelectedSection('home');
+      // if (data.visible(1/4, 2/4)) setSelectedSection('about');
       
       const timer = 0.0001 * Date.now();
-
       spheres.forEach((_sphere, i) => {
         const sphereRef = sphereRefs.current[i];
-
         if (sphereRef) {
           sphereRef.position.x = 5 * Math.cos(timer + i + data.offset);
           sphereRef.position.y = 5 * Math.sin(timer + i * 1.1 + data.offset);
@@ -94,19 +95,21 @@ const Scene = () => {
         <CameraControls />
         <ambientLight intensity={1} />
         <pointLight position={[0, 10, 10]} />
-        <ScrollControls pages={3} damping={0.3} >
+        <ScrollControls pages={4} damping={0.3} >
           <AnimatedSpheres spheres={spheres} />
           <Scroll html style={{ height: '100%', width: '100%' }}>
             <div className='app'>
-              <div id='home' className="page-section">
+              <div id='home' className="page-section" ref={homeRef}>
                 <Home />
               </div>
-              <div className="page-section">
+              <div className="page-section" ref={aboutRef} >
                 <h1 className="title">
                   About
                 </h1>
               </div>
-              <div className="page-section">
+              <div className="page-section" ref={portfolioRef} >
+              </div>
+              <div className="page-section" ref={contactRef} >
               </div>
             </div>
           </Scroll>
