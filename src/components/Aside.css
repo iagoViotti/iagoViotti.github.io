@@ -1,5 +1,5 @@
 #aside {
-  position: absolute;
+  position: fixed;
   left: 20px;
   top: 50%;
   transform: translateY(-50%);

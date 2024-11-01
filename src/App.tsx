@@ -1,12 +1,37 @@
-import Scene from './components/Scene'
 import './App.css'
-import { Provider } from './context/Context'
+import Home from './components/Home'
+import { Element } from 'react-scroll'
 
 function App() {
   return (
-    <Provider>
-      <Scene />
-    </Provider>
+    <div className='app'>
+      <Element name='home'>
+        <div id='home' className="page-section" >
+          <Home />
+        </div>
+      </Element>
+      <Element name='about'>
+        <div className="page-section" >
+          <h1 className="title">
+            About
+          </h1>
+        </div>
+      </Element>
+      <Element name='portfolio'>
+        <div className="page-section" >
+          <h1 className="title">
+            Portfolio
+          </h1>
+        </div>
+      </Element>
+      <Element name='contact'>
+        <div className="page-section" >
+          <h1 className="title">
+            Contact
+          </h1>
+        </div>
+      </Element>
+    </div >
   )
 }
 

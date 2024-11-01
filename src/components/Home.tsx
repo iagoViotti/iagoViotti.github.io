@@ -1,11 +1,6 @@
-import { useScroll } from '@react-three/drei';
-
 import './Home.css';
 
 const Home = () => {
-  const data = useScroll();
-  // useFrame(() => {
-  // });
 
   return (
     <div className="home-container">

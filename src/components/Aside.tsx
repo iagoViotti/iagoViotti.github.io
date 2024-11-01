@@ -1,7 +1,16 @@
 import { Home, User, Briefcase, Mail } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import { Events, Link, scrollSpy } from 'react-scroll'
+import React, { useEffect } from 'react'
 import { useSection } from '../context/Context'
 import './Aside.css'
+
+
+interface SectionProps {
+  id: string
+  icon: React.ElementType
+  label: string
+  isSelected: boolean
+}
 
 const sectionData = [
   { id: 'home', icon: Home, label: 'Home' },
@@ -10,22 +19,14 @@ const sectionData = [
   { id: 'contact', icon: Mail, label: 'Contact' }
 ]
 
-interface SectionProps {
-  id: string
-  icon: React.ElementType
-  label: string
-  isSelected: boolean
-  onClick: () => void
-}
-
-const Section: React.FC<SectionProps> = ({ id, icon: Icon, label, isSelected, onClick }) => {
+const Section: React.FC<SectionProps> = ({ id, icon: Icon, label, isSelected }) => {
   return (
     <div
       className={`section ${isSelected ? 'selected' : ''}`}
-      onClick={onClick}
+      key={id}
     >
       {isSelected ? (
-        <div className="writing-vertical text-lg font-semibold">
+        <div>
           {label.split('').map((letter, index) => (
             <span key={index}>
               {letter}
@@ -40,31 +41,28 @@ const Section: React.FC<SectionProps> = ({ id, icon: Icon, label, isSelected, on
 }
 
 const Aside = () => {
-  const { scrollToSection, homeRef, aboutRef, portfolioRef, contactRef, setSelectedSection, selectedSection } = useSection()
-
-  const handleClick = (id: string) => {
-    setSelectedSection(id)
-    if (id === 'home') scrollToSection(homeRef)
-    if (id === 'about') scrollToSection(aboutRef)
-    if (id === 'portfolio') scrollToSection(portfolioRef)
-    if (id === 'contact') scrollToSection(contactRef)
-  }
+  const { setSelectedSection, selectedSection } = useSection()
 
   useEffect(() => {
-    console.log(homeRef.current);
-    
-  }, [selectedSection]);
+    scrollSpy.update()
+    return () => Events.scrollEvent.remove('end')
+  }, [])
 
 
+  const handleSetActive = (id: string) => {
+    setSelectedSection(id)
+  }
+  
   return (
     <div id="aside" >
       {sectionData.map((section) => (
-        <Section
-          key={section.id}
-          {...section}
-          isSelected={selectedSection === section.id}
-          onClick={() => handleClick(section.id)}
-        />
+        <Link to={section.id} key={`${section.id}link`} smooth='true' spy={true} onSetActive={() => handleSetActive(section.id)}>
+          <Section
+            key={section.id}
+            {...section}
+            isSelected={selectedSection === section.id}
+          />
+        </Link>
       ))}
     </div>
   );
