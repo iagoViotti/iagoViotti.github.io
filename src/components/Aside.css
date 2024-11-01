@@ -27,10 +27,16 @@
   line-height: 1.75rem;
 }
 
+.section:has(svg) {
+  cursor: pointer;
+}
+
 .section span {
   display: block;
 }
 
 .selected {
-  color: #ff0000;
+  color: #424242;
+  font-weight: bold;
+  font-size: 2em;
 }
