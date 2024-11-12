@@ -8,7 +8,6 @@
     'main main main main'
     'main main main main'
     'footer footer footer footer'
-    'footer footer footer footer'
     ;
 }
 
@@ -88,5 +87,28 @@
 
 .footer {
   grid-area: footer;
-  /* background-color: rgba(255, 0, 0, 0.253); */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.footer .lucide {
+  font-size: 1.5em;
+  color: rgba(128, 128, 128, 0.527);
+}
+
+.arrow-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.footer .lucide:hover {
+  color: var(--text);
+}
+
+.hidden {
+  display: none;
 }

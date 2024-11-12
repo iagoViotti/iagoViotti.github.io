@@ -1,5 +1,7 @@
+import { ArrowBigDownDash } from 'lucide-react';
 import './Home.css';
 import { createRef, useEffect, useState } from 'react';
+import { Link } from 'react-scroll';
 
 const Home = () => {
   const [words] = useState(['Developer', 'Designer', 'Artist']);
@@ -74,7 +76,13 @@ const Home = () => {
         </div>
       </div>
       <div className='footer'>
-        footer
+        <Link
+          to='about'
+          smooth='true'
+          className='arrow-button'
+        >
+          <ArrowBigDownDash size={80} id='arrowBigDownDash' />
+        </Link>
       </div>
     </div>
   )
