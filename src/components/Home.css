@@ -2,9 +2,91 @@
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  display: grid;
+  grid-template:
+    'header header header config'
+    'main main main main'
+    'main main main main'
+    'footer footer footer footer'
+    'footer footer footer footer'
+    ;
+}
+
+.config {
+  grid-area: config;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  padding: 30px;
+  box-sizing: border-box;
+  color: var(--primary);
+  /* border: 2px solid red; */
 }
 
+.main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 30px;
+  box-sizing: border-box;
+  color: var(--primary);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.main-container .text {
+  color: var(--text);
+  max-width: 50%;
+  font-size: 1em;
+}
+
+.home-title {
+  font-size: 8rem;
+  margin: 0;
+}
+
+.home-title::after {
+  content: 'Viotti';
+  font-size: 10rem;
+  text-decoration: underline;
+}
+
+.home-subtitle-container {
+  display: flex;
+  align-self: flex-start;
+  font-size: 4em;
+}
+
+.home-subtitle {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#text {
+  color: white;
+  text-decoration: underline;
+}
+
+.console-underscore {
+  display: inline-block;
+  position: relative;
+  top: -0.14em;
+  left: 10px;
+  font-size: 0.8em;
+  font-weight: 900;
+}
+
+.footer {
+  grid-area: footer;
+  /* background-color: rgba(255, 0, 0, 0.253); */
+}
