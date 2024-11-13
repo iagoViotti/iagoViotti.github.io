@@ -22,7 +22,7 @@ const Scene = () => {
           Math.random() * 5 - 10,
         ],
         args: [0.01, 32, 16],
-        color: `hsl(${Math.random() * 50}, 100%, 50%)`,
+        color: `hsl(${Math.random() * 20}, 100%, 60%)`,
       });
     }
     setSpheres(newSpheres);

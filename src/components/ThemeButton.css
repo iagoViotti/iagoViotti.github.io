@@ -8,6 +8,9 @@
   border: 3px solid white;
   border-radius: 50%;
   box-sizing: border-box;
+  background-color: var(--background-50);
+  transition: 3s;
+  border-color: var(--secondary);
 }
 
 .theme-button {
@@ -31,7 +34,7 @@
   transform: translate(-50%, -50%);
   height: 200%;
 }
-
+/* 
 .light {
   transition: 3s;
   background-color: #ffffffbe;
@@ -40,6 +43,6 @@
 
 .dark {
   transition: 3s;
-  background-color: #313131be;
-  border-color: #313131;
-}
+  background-color: var(--background-50);
+  border-color: 'red';
+} */

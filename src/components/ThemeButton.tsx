@@ -23,7 +23,7 @@ const ThemeButton = () => {
 
 
   return (
-    <div className={`theme-container ${theme}`}>
+    <div className={`theme-container`}>
       <label
         className="theme-button"
       >

@@ -1,8 +1,9 @@
 .canvas-container {
   height: 100vh;
   width: 100%;
-  background-color: white;
+  background-color: var(--background);
   position: fixed;
+  transition: 3s;
 }
 
 .app {
@@ -14,7 +15,6 @@
 
 .page-section {
   height: 100vh;
-  /* width: 100%; */
   color: black;
   display: flex;
   justify-content: center;
@@ -25,15 +25,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-
-::-webkit-scrollbar {
-  background: rgba(255, 255, 255, 0.5);
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgb(216, 216, 216);
-  border-radius: 100px;
 }
