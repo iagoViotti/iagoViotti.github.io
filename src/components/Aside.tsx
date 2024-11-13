@@ -1,33 +1,29 @@
-import { Home, User, Briefcase, Mail } from 'lucide-react'
-import { Events, Link, scrollSpy } from 'react-scroll'
-import React, { useEffect } from 'react'
-import { useSection } from '../context/Context'
-import { gsap } from 'gsap'
-import './Aside.css'
-
+import { Home, User, Briefcase, Mail } from 'lucide-react';
+import { Events, Link, scrollSpy } from 'react-scroll';
+import React, { useEffect } from 'react';
+import { useSection } from '../context/Context';
+import { gsap } from 'gsap';
+import './Aside.css';
 
 interface SectionProps {
-  id: string
-  icon: React.ElementType
-  label: string
-  isSelected: boolean
+  id: string;
+  icon: React.ElementType;
+  label: string;
+  isSelected: boolean;
 }
 
 const sectionData = [
-  { id: 'home', icon: Home, label: 'Home' },
-  { id: 'about', icon: User, label: 'About' },
-  { id: 'portfolio', icon: Briefcase, label: 'Portfolio' },
-  { id: 'contact', icon: Mail, label: 'Contact' }
-]
+  { id: 'home', icon: Home, label: 'hello' },
+  { id: 'about', icon: User, label: 'sobre' },
+  { id: 'portfolio', icon: Briefcase, label: 'portfolio' },
+  { id: 'contact', icon: Mail, label: 'contato' },
+];
 
 const Section: React.FC<SectionProps> = ({ id, icon: Icon, label, isSelected }) => {
   return (
-    <div
-      className={`section ${isSelected ? 'selected' : ''}`}
-      key={id}
-    >
+    <div className={`section ${isSelected ? 'selected' : ''}`} key={id}>
       {isSelected ? (
-        <div className={`letter-container letter-container-${id}`} >
+        <div className={`letter-container letter-container-${id}`}>
           {label.split('').map((letter, index) => (
             <span key={index} className={`letter-${id}`}>
               {letter}
@@ -35,39 +31,44 @@ const Section: React.FC<SectionProps> = ({ id, icon: Icon, label, isSelected }) 
           ))}
         </div>
       ) : (
-        <Icon
-          size={30}
-          className="icon"
-          strokeWidth={2.5}
-          color={'var(--text)'}
-        />
+        <Icon size={30} className="icon" strokeWidth={2.5} color={'var(--text)'} />
       )}
     </div>
-  )
-}
+  );
+};
 
-const Aside = () => {
-  const { setSelectedSection, selectedSection } = useSection()
-
-  useEffect(() => {
-    scrollSpy.update()
-    return () => Events.scrollEvent.remove('end')
-  }, [])
+const Aside: React.FC = () => {
+  const { setSelectedSection, selectedSection } = useSection();
 
   useEffect(() => {
-    if (selectedSection) {
-      gsap.fromTo(
-        `.letter-container-${selectedSection}`,
-        { scale: 0 },
-        { scale: 1, duration: 0.3, ease: "expo.out" }
-      );
-    }
+    scrollSpy.update();
+    return () => Events.scrollEvent.remove('end');
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (selectedSection) {
+        gsap.fromTo(
+          `.letter-container-${selectedSection}`,
+          { scale: 0 },
+          { scale: 1, duration: 0.3, ease: 'expo.out' }
+        );
+      }
+    });
+
+    return () => ctx.revert(); // Clean up animations on component unmount
   }, [selectedSection]);
 
   return (
-    <div id="aside" >
+    <div id="aside">
       {sectionData.map((section) => (
-        <Link to={section.id} key={`${section.id}link`} smooth='true' spy={true} onSetActive={(id) => setSelectedSection(id)}>
+        <Link
+          to={section.id}
+          key={`${section.id}link`}
+          smooth={true}
+          spy={true}
+          onSetActive={(id) => setSelectedSection(id)}
+        >
           <Section
             key={section.id}
             {...section}
@@ -77,6 +78,6 @@ const Aside = () => {
       ))}
     </div>
   );
-}
+};
 
 export default Aside;
