@@ -14,9 +14,10 @@
 .config {
   grid-area: config;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  padding: 30px;
+  padding: 20px;
   box-sizing: border-box;
   color: var(--primary);
   /* border: 2px solid red; */
@@ -26,7 +27,7 @@
   grid-area: main;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-end;
   padding: 30px;
   box-sizing: border-box;

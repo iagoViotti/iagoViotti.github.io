@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const SectionContext = createContext<any>('');
 
@@ -12,10 +12,6 @@ export const useSection = () => {
 
 export const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedSection, setSelectedSection] = useState('home')
-  const homeRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
-  const portfolioRef = useRef<HTMLDivElement>(null);
-  const contactRef = useRef<HTMLDivElement>(null);
 
   const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
     sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -24,8 +20,7 @@ export const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) 
   return (
     <SectionContext.Provider
       value={{
-        selectedSection, setSelectedSection,
-        homeRef, aboutRef, portfolioRef, contactRef, scrollToSection
+        selectedSection, setSelectedSection, scrollToSection
       }}
     >
       {children}

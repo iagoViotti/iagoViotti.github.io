@@ -3,6 +3,7 @@ import { createRef, useEffect, useState } from 'react';
 // import { ArrowBigDownDash } from 'lucide-react';
 // import { Link } from 'react-scroll';
 import { gsap } from 'gsap';
+import ThemeButton from './ThemeButton';
 
 import { CustomEase } from 'gsap/CustomEase';
 
@@ -73,9 +74,8 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <div
-        className='config'>
-        config
+      <div className='config'>
+        <ThemeButton />
       </div>
       <div className="main">
         <h1 className="home-title">iago</h1>
