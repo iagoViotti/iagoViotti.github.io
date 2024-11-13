@@ -1,14 +1,10 @@
 import { useThree, useFrame } from '@react-three/fiber'
 import { Vector3 } from 'three'
 import { useEffect, useState } from 'react'
-// import { useScroll } from '@react-three/drei'
-
 
 const CameraControls = () => {
   const { camera } = useThree();
   const [mouse, setMouse] = useState({ x: 0, y: 0, z: 3 });
-  // const ref = useRef();
-  // const data = useScroll();
 
   const onMouseMove = (event: MouseEvent) => {
     setMouse({
