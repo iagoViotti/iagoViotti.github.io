@@ -1,5 +1,6 @@
 import './App.css'
 import Home from './components/Home'
+import About from './components/About'
 import { Element } from 'react-scroll'
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <Element name='about'>
         <div className="page-section" >
           <h1 className="title">
-            About
+            <About />
           </h1>
         </div>
       </Element>

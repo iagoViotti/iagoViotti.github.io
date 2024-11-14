@@ -39,7 +39,7 @@
 }
 
 .selected {
-  color: var(--text);
+  color: var(--primary);
   font-weight: bold;
   font-size: 2em;
 }

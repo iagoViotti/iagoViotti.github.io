@@ -36,7 +36,7 @@ const ThemeButton = () => {
         <Sun size={36} color={'transparent'} />
       </label>
       <div className="theme-icon-container" ref={themeRef}>
-        <Sun size={36} color={'var(--primary)'} strokeWidth={2.3} className="theme-icon sun" />
+        <Sun size={36} color={'#414141'} strokeWidth={2.3} className="theme-icon sun" />
         <Moon size={36} color={'white'} strokeWidth={2.3} className="theme-icon moon" />
       </div>
     </div>

@@ -83,13 +83,14 @@ const Home = () => {
           <div className="home-subtitle-container">
             <h2 className="home-subtitle">web</h2>
             <div className="console-container">
-              <span id="text" ref={textRef}></span>
+              <span id="motion-text" ref={textRef}></span>
               <span id="console" className={`console-underscore ${visible ? '' : 'hidden'}`}>_</span>
             </div>
           </div>
           <div className='text' >
             <span>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem et maiores quam non, architecto magni quas quae ullam minima totam optio, fugiat doloribus tempore ea eligendi qui inventore nostrum nihil?
+              Desenvolvedor Full-stack ✦︎ 
+              Artista multidisciplinar
             </span>
           </div>
         </div>
