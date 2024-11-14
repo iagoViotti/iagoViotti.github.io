@@ -13,9 +13,7 @@ function App() {
       </Element>
       <Element name='about'>
         <div className="page-section" >
-          <h1 className="title">
-            <About />
-          </h1>
+          <About />
         </div>
       </Element>
       <Element name='portfolio'>

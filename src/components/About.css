@@ -5,3 +5,23 @@
   display: flex;
 }
 
+.photo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid yellow;
+  /* min-width: 15em; */
+}
