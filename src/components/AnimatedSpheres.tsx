@@ -49,6 +49,8 @@ const AnimatedSpheres = ({ spheres }: { spheres: SphereType[] }) => {
             color={sphere.color}
             emissive='white'
             emissiveIntensity={0.1}
+            // emissive='crimson'
+            // emissiveIntensity={5}
           />
         </mesh>
       ))}

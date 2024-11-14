@@ -1,15 +1,15 @@
 import './Home.css';
 import { createRef, useEffect, useState } from 'react';
+import ThemeButton from './ThemeButton';
 // import { ArrowBigDownDash } from 'lucide-react';
 // import { Link } from 'react-scroll';
-import { gsap } from 'gsap';
-import ThemeButton from './ThemeButton';
+// import { gsap } from 'gsap';
 
-import { CustomEase } from 'gsap/CustomEase';
+// import { CustomEase } from 'gsap/CustomEase';
 
-gsap.registerPlugin(CustomEase);
+// gsap.registerPlugin(CustomEase);
 
-CustomEase.create("myEase", "M0,0 C0.047,-0.125 0.225,-0.242 0.316,-0.161 0.468,0.044 0.374,1 1,1 ");
+// CustomEase.create("myEase", "M0,0 C0.047,-0.125 0.225,-0.242 0.316,-0.161 0.468,0.044 0.374,1 1,1 ");
 
 const Home = () => {
   const [words] = useState(['Developer', 'Designer', 'Artist']);

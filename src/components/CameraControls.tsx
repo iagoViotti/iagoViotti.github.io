@@ -8,8 +8,8 @@ const CameraControls = () => {
 
   const onMouseMove = (event: MouseEvent) => {
     setMouse({
-      x: (event.clientX - (window.innerWidth / 2)) / 100,
-      y: (event.clientY - (window.innerHeight / 2)) / 100,
+      x: (event.clientX - (window.innerWidth / 2)) / 280,
+      y: (event.clientY - (window.innerHeight / 2)) / 280,
       z: 5
     });
   };

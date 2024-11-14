@@ -54,7 +54,7 @@ const Scene = () => {
           position={[0, 0, 5]}
         />
         <CameraControls />
-        <ambientLight intensity={1} />
+        <ambientLight intensity={4} />
         <pointLight position={[0, 10, 10]} />
         <AnimatedSpheres spheres={spheres} />
       </Canvas>
