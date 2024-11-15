@@ -58,3 +58,8 @@ body {
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
+
+::selection {
+  background-color: #ffcc00;
+  color: #000000;
+}

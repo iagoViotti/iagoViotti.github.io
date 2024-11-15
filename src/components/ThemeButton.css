@@ -8,7 +8,8 @@
   border: 3px solid white;
   border-radius: 50%;
   box-sizing: border-box;
-  background-color: var(--background-50);
+  /* background-color: var(--background-50); */
+  background-color: var(--glass);
   transition: 3s;
   border-color: var(--secondary);
 }
