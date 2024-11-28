@@ -31,7 +31,7 @@ const Section: React.FC<SectionProps> = ({ id, icon: Icon, label, isSelected }) 
           ))}
         </div>
       ) : (
-        <Icon size={30} className="icon" strokeWidth={2.5} color={'var(--text)'} />
+        <Icon size={30} className="icon" strokeWidth={2.5} />
       )}
     </div>
   );

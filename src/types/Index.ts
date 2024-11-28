@@ -4,4 +4,14 @@ interface SphereType {
   color: string;
 }
 
-export type { SphereType };
+interface Project {
+  name: string;
+  type: string;
+  description: string;
+  year: number;
+  image: string;
+  externalLink: string;
+}
+
+
+export type { SphereType, Project };

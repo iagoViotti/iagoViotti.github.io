@@ -23,12 +23,12 @@ const ThemeButton = () => {
 
 
   return (
-    <div className={`theme-container`}>
+    <div className='theme-container'>
       <label
         className="theme-button"
       >
         <button
-          className={`theme-button`}
+          className='theme-button'
           onClick={() => handleClick()}
           style={{ display: 'none' }}
         >

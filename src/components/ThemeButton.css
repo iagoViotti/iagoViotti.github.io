@@ -5,7 +5,7 @@
   display: flex;
   clip-path: circle(50%);
   overflow: hidden;
-  border: 3px solid white;
+  border: 3px solid;
   border-radius: 50%;
   box-sizing: border-box;
   /* background-color: var(--background-50); */
