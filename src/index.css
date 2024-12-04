@@ -21,6 +21,8 @@
   --secondary: #c3bbb6;
   --accent: #ffffff;
   --glass: #ffffff80;
+  --highcontrast: #000000;
+  --filter-contrast: #00000000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -38,6 +40,8 @@
   --secondary: #414141;
   --accent: #ffffff;
   --glass: #ffffff18;
+  --highcontrast: #ffffff;
+  --filter-contrast: hsla(0, 0%, 0%, 0.20);
 }
 
 body {

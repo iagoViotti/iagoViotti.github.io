@@ -1,8 +1,8 @@
 import './Home.css';
 import { createRef, useEffect, useState } from 'react';
 import ThemeButton from './ThemeButton';
-// import { ArrowBigDownDash } from 'lucide-react';
-// import { Link } from 'react-scroll';
+import { ArrowBigDownDash } from 'lucide-react';
+import { Link } from 'react-scroll';
 // import { gsap } from 'gsap';
 
 // import { CustomEase } from 'gsap/CustomEase';

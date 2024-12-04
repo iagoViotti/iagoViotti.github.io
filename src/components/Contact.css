@@ -1,0 +1,46 @@
+.contact-container {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template:
+    'header header header config'
+    'main main main main'
+    'bottom-main bottom-main bottom-main bottom-main'
+    'footer footer footer footer'
+    'footer footer footer footer'
+    ;
+  /* border: 2px solid hotpink; */
+}
+
+.contact-container .main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 30px;
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--primary);
+}
+
+.contact-title {
+  display: flex;
+  width: 90%;
+  margin: 0;
+  padding: 0;
+  border-bottom: 10px solid var(--primary);
+  justify-content: end;
+}
+
+.contact-title h1 {
+  font-size: 4em;
+  margin: 0;
+  padding: 0;
+}
+
+.bottom-main {
+  grid-area: bottom-main;
+  background-color: var(--glass);
+}

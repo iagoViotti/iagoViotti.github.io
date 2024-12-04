@@ -155,8 +155,7 @@
   flex-direction: row;
   align-items: center;
   box-sizing: border-box;
-  /* border: 1px solid var(--text); */
-  color: var(--text);
+  color: var(--primary);
   padding: 0;
   cursor: pointer;
 }
@@ -166,7 +165,7 @@
   margin: 0;
   margin-left: 5px;
   padding: 10px;
-  color: var(--text);
+  color: var(--highcontrast);
 }
 
 .links-container {

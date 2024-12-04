@@ -14,7 +14,7 @@ export const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const [selectedSection, setSelectedSection] = useState('home')
 
   const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
-    sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (

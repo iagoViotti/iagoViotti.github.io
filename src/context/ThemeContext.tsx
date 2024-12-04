@@ -1,6 +1,13 @@
 import { createContext, useContext, useState } from 'react';
 
-const ThemeContext = createContext<any>('');
+interface ThemeContextType {
+  theme: string;
+  setTheme: (theme: string) => void;
+}
+
+const ThemeContext = createContext<ThemeContextType>(
+  {} as ThemeContextType
+);
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);

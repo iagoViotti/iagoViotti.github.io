@@ -27,10 +27,10 @@
   font-size: 1.125rem;
   line-height: 1.75rem;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .section:has(svg) {
-  cursor: pointer;
   border: 1px solid transparent;
   border-radius: 50%;
   box-sizing: border-box;

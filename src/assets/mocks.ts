@@ -40,6 +40,38 @@ export const mockProjects: Project[] = [
     year: 2022,
     image: "https://picsum.photos/seed/codementor/400/300",
     externalLink: "https://example.com/code-mentor"
+  },
+  {
+    name: "Travel Companion",
+    type: "Mobile App",
+    description: "Plan and organize your trips with ease",
+    year: 2021,
+    image: "https://picsum.photos/seed/travel/400/300",
+    externalLink: "https://example.com/travel-companion"
+  },
+  {
+    name: "Home Automation",
+    type: "IoT Device",
+    description: "Automate your home for convenience and efficiency",
+    year: 2020,
+    image: "https://picsum.photos/seed/automation/400/300",
+    externalLink: "https://example.com/home-automation"
+  },
+  {
+    name: "Recipe Book",
+    type: "Web Application",
+    description: "Discover and share delicious recipes",
+    year: 2021,
+    image: "https://picsum.photos/seed/recipe/400/300",
+    externalLink: "https://example.com/recipe-book"
+  },
+  {
+    name: "Rubber Duck Debugger",
+    type: "Web Application",
+    description: "Debug your code by explaining it to a rubber duck",
+    year: 2020,
+    image: "https://picsum.photos/seed/debugger/400/300",
+    externalLink: "https://example.com/rubber-duck-debugger"
   }
 ];
 
