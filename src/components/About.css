@@ -15,9 +15,10 @@
   height: 80%;
   padding: 20px;
   box-sizing: border-box;
-  color: var(--text);
-  font-size: 1.3em;
+  color: var(--highcontrast);
+  font-size: 1.4em;
 }
+
 
 .photo-container {
   position: relative;
@@ -27,7 +28,6 @@
   align-items: center;
   max-width: 50%;
   height: 80%;
-  /* border: 2px solid green; */
   box-sizing: border-box;
   align-self: center;
   margin: 50px;
@@ -173,8 +173,12 @@
   padding: 0;
 }
 
+.links-container svg {
+  color: var(--highcontrast)
+}
+
 .link-container svg {
-  transition: 0.3s;  
+  transition: 0.3s;
 }
 
 .link-container:hover svg {
