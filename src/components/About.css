@@ -19,6 +19,9 @@
   font-size: 1.4em;
 }
 
+.text-container .animated-line {
+  margin-bottom: 1em;
+}
 
 .photo-container {
   position: relative;

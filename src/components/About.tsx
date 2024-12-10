@@ -1,14 +1,12 @@
 import './About.css'
 import { ArrowRight } from 'lucide-react'
+import AnimatedText from './AnimatedText'
 
 const About = () => {
   return (
     <div className="about-container">
       <div className={`text-container`}>
-        <span>
-          Oi, eu sou o Iago Viotti, brasileiro, artista multidisciplinar e desenvolvedor front-end.<br />
-          Como um grande entusiasta da tecnologia e da arte acredito na combinação das duas e estou sempre procurando novas formas de fazê-las caminharem juntas para criar experiências digitais imersivas e agradáveis.
-        </span>
+        <AnimatedText />
       </div>
       <div className="photo-container">
         <div className="photo-border">
