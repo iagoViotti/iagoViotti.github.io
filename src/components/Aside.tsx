@@ -67,6 +67,7 @@ const Aside: React.FC = () => {
           key={`${section.id}link`}
           smooth={true}
           spy={true}
+          hashSpy={true}
           onSetActive={(id) => setSelectedSection(id)}
         >
           <Section

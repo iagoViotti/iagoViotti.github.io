@@ -4,14 +4,13 @@ import * as THREE from 'three';
 import { SphereType } from '../types/Index'
 import { useTheme } from '../context/ThemeContext';
 
-
 const AnimatedSpheres = ({ spheres }: { spheres: SphereType[] }) => {
   const sphereRefs = useRef<(THREE.Mesh | null)[]>([]);
   const { theme } = useTheme();
   const offset = useRef(0);
 
   const animateSpheres = () => {
-    const timer = 0.0001 * Date.now();
+    const timer = 0.0002 * Date.now();
     spheres.forEach((_sphere, i) => {
       const sphereRef = sphereRefs.current[i];
       if (sphereRef) {
@@ -49,8 +48,8 @@ const AnimatedSpheres = ({ spheres }: { spheres: SphereType[] }) => {
             color={sphere.color}
             emissive='white'
             emissiveIntensity={0.1}
-            // emissive='crimson'
-            // emissiveIntensity={5}
+          // emissive='crimson'
+          // emissiveIntensity={5}
           />
         </mesh>
       ))}

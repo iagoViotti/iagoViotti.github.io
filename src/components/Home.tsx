@@ -1,15 +1,7 @@
 import './Home.css';
 import { createRef, useEffect, useState } from 'react';
 import ThemeButton from './ThemeButton';
-// import { ArrowBigDownDash } from 'lucide-react';
-// import { Link } from 'react-scroll';
-// import { gsap } from 'gsap';
 
-// import { CustomEase } from 'gsap/CustomEase';
-
-// gsap.registerPlugin(CustomEase);
-
-// CustomEase.create("myEase", "M0,0 C0.047,-0.125 0.225,-0.242 0.316,-0.161 0.468,0.044 0.374,1 1,1 ");
 
 const Home = () => {
   const [words] = useState(['Developer', 'Designer', 'Artist']);
@@ -19,7 +11,7 @@ const Home = () => {
   const [waiting, setWaiting] = useState(false);
   const [visible, setVisible] = useState(true);
   const textRef = createRef<HTMLSpanElement>();
-  // const arrowRef = createRef<SVGSVGElement>();
+
 
   useEffect(() => {
     const target = textRef.current;
@@ -62,15 +54,6 @@ const Home = () => {
     };
   }, [letterCount, waiting, x, words, currentWordIndex]);
 
-  // const gsapAnimate = (target: any) => {
-  //   gsap.to(target.current, {
-  //     duration: 1.5,
-  //     y: 500,
-  //     ease: "myEase",
-  //     opacity: 0,
-  //     display: 'none',
-  //   });
-  // };
 
   return (
     <div className="home-container">
@@ -89,22 +72,13 @@ const Home = () => {
           </div>
           <div className='text' >
             <span>
-              Desenvolvedor Full-stack ✦︎ 
+              Desenvolvedor Full-stack ✦︎
               Artista multidisciplinar
             </span>
           </div>
         </div>
       </div>
       <div className='footer'>
-        {/* <Link
-          to='about'
-          smooth='true'
-          className='arrow-button'
-          onClick={() => gsapAnimate(arrowRef)}
-        >
-          <ArrowBigDownDash size={80} id='arrowBigDownDash' ref={arrowRef}
-          />
-        </Link> */}
       </div>
     </div>
   )
