@@ -26,7 +26,7 @@ const AnimatedText: React.FC = () => {
           line,
           {
             opacity: 0,
-            y: 50
+            y: 50,
           },
           {
             opacity: 1,
@@ -36,7 +36,7 @@ const AnimatedText: React.FC = () => {
             delay: 0.5,
             scrollTrigger: {
               trigger: line,
-              start: 'bottom bottom-=50',
+              start: 'bottom bottom-=20',
               toggleActions: 'play none none reverse',
             }
           }
@@ -52,7 +52,7 @@ const AnimatedText: React.FC = () => {
   return (
     <div ref={containerRef}>
       {lines.map((line, index) => (
-        <div key={index}>
+        <div key={index} className='line-wrapper'>
           <div className="animated-line">
             {line}
           </div>

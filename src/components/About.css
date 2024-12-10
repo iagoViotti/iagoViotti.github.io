@@ -20,7 +20,12 @@
 }
 
 .text-container .animated-line {
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
+}
+
+.text-container .line-wrapper {
+  position: relative;
+  overflow: hidden;
 }
 
 .photo-container {
