@@ -13,14 +13,13 @@ const ProjectList: React.FC = () => {
         {selectedProject ? (
           <ProjectVisualization project={selectedProject} />
         ) : (
-          <div className="placeholder">Passe o mouse sobre um projeto para ver os detalhes</div>
+          <div className="placeholder">Selecione um projeto para ver os detalhes</div>
         )}
       </div>
       <div className="list">
         {mockProjects.map((project, index) => (
           <div
-            key={project.name}
-            className={`list-item ${hoveredIndex === index ? 'hovered' : 'not-hovered'}`}
+            key={project.name} className={`list-item ${hoveredIndex === index ? 'hovered' : 'not-hovered'}`}
             onMouseEnter={() => {
               setSelectedProject(project);
               setHoveredIndex(index);
