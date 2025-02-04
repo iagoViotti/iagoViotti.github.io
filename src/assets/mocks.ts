@@ -70,7 +70,7 @@ export const mockProjects: Project[] = [
     type: "Web Application",
     description: "Debug your code by explaining it to a rubber duck",
     year: 2020,
-    image: "https://picsum.photos/seed/debugger/400/300",
+    image: "./rubberduck.jpg",
     externalLink: "https://example.com/rubber-duck-debugger"
   }
 ];

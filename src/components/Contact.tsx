@@ -1,7 +1,9 @@
 import './Contact.css'
 import { Mail, Github, Linkedin } from 'lucide-react'
+import { useState } from 'react'
 
 const Contact = () => {
+  const [mailHover, setMailHover] = useState(false)
 
   const handleMail = () => {
     window.open('mailto: iago.viotti@gmail.com')
@@ -34,12 +36,25 @@ const Contact = () => {
               <Linkedin size={35} />
             </label>
           </div>
-          <label
-            className='svg-label mail-svg'
-            onClick={() => handleMail()}
+          <div
+            className="mail-label-div"
           >
-            <Mail size={35} />
-          </label>
+            <label
+              className={`svg-label mail-svg ${mailHover ? 'mail-svg-hover' : ''}`}
+              // onMouseOver={() => setMailHover(true)}
+              // onMouseLeave={() => setMailHover(false)}
+            >
+              <Mail size={35} color={'transparent'} />
+            </label>
+            <label
+              className='svg-label mail-label'
+              onClick={() => handleMail()}
+              // onMouseEnter={() => setMailHover(true)}
+              // onMouseLeave={() => setMailHover(false)}
+            >
+              <Mail size={35} />
+            </label>
+          </div>
         </div>
       </div>
     </div>
