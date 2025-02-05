@@ -10,6 +10,8 @@ const Contact = () => {
     navigator.clipboard.writeText('iago.viotti@gmail.com')
   }
 
+  const text = 'iago.viotti@gmail.com'
+
   return (
     <div className="contact-container">
       <div className="main">
@@ -40,17 +42,25 @@ const Contact = () => {
             className="mail-label-div"
           >
             <label
-              className={`svg-label mail-svg ${mailHover ? 'mail-svg-hover' : ''}`}
-              // onMouseOver={() => setMailHover(true)}
-              // onMouseLeave={() => setMailHover(false)}
+              className={`mail-svg mail-label
+                ${mailHover ? 'mail-svg-hover' : ''}`}
+              onMouseOver={() => setMailHover(true)}
+              onMouseLeave={() => setMailHover(false)}
+              onClick={() => { navigator.clipboard.writeText(text) }}
             >
+              {
+                mailHover &&
+                text.split('').map((letter, index) => (
+                  <span key={index}>{letter}</span>
+                ))
+              }
               <Mail size={35} color={'transparent'} />
             </label>
             <label
-              className='svg-label mail-label'
+              className={`mail-label ${mailHover ? 'mail-label-hover' : ''}`}
               onClick={() => handleMail()}
-              // onMouseEnter={() => setMailHover(true)}
-              // onMouseLeave={() => setMailHover(false)}
+              onMouseEnter={() => setMailHover(true)}
+              onMouseLeave={() => setMailHover(false)}
             >
               <Mail size={35} />
             </label>
