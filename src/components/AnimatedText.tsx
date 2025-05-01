@@ -4,10 +4,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const placeholderText = `
-          Oi, eu sou o Iago Viotti, brasileiro, artista multidisciplinar e desenvolvedor front-end.
-          Como um grande entusiasta da tecnologia e da arte acredito na combinação das duas.
-          Estou sempre procurando novas formas de fazê-las caminharem juntas para criar experiências digitais imersivas, agradáveis e com personalidade.`
+const placeholderText = `Oi! Eu sou o Iago Viotti, brasileiro, artista multidisciplinar e desenvolvedor front-end.
+Apaixonado por tecnologia e arte, acredito no poder da combinação entre os dois universos para criar experiências digitais que vão além do funcional — experiências que encantam, comunicam e tem alma.
+Exploro constantemente novas formas de integrar estética e interatividade, buscando projetos que unam design, criatividade e inovação.
+Meu foco é desenvolver interfaces que não só funcionem bem, mas que também despertem emoções e reflitam personalidade.`
 
 const AnimatedText: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)

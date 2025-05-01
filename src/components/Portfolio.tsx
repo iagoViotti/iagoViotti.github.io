@@ -25,6 +25,7 @@ const ProjectList: React.FC = () => {
               setHoveredIndex(index);
             }}
             onMouseLeave={() => setHoveredIndex(null)}
+            onClick={() => project.externalLink && window.open(project.externalLink, '_blank')}
           >
             <small className="project-meta">{project.year} | {project.type}</small>
             <h2 className="project-name">{project.name}</h2>
@@ -51,7 +52,9 @@ const ProjectVisualization: React.FC<{ project: Project }> = ({ project }) => {
           </a>
         </div>
       </div>
-      <img src={project.image} alt={project.name} className="project-image" />
+      <div className="image-div">
+        <img src={project.image} alt={project.name} className="project-image" />
+      </div>
     </div>
   );
 };

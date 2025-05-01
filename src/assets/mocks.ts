@@ -2,76 +2,60 @@ import { Project } from '../types/Index';
 
 export const mockProjects: Project[] = [
   {
-    name: "Eco Tracker",
-    type: "Mobile App",
-    description: "An app to track and reduce your carbon footprint",
-    year: 2023,
-    image: "https://picsum.photos/seed/eco/400/300",
-    externalLink: "https://example.com/eco-tracker"
-  },
-  {
-    name: "Virtual Gallery",
-    type: "Web Application",
-    description: "An immersive online art gallery experience",
-    year: 2022,
-    image: "https://picsum.photos/seed/gallery/400/300",
-    externalLink: "https://example.com/virtual-gallery"
-  },
-  {
-    name: "Smart Home Hub",
-    type: "IoT Device",
-    description: "Central control system for smart home devices",
-    year: 2021,
-    image: "https://picsum.photos/seed/smarthome/400/300",
-    externalLink: "https://example.com/smart-home-hub"
-  },
-  {
-    name: "Fitness Buddy",
-    type: "Mobile App",
-    description: "AI-powered personal trainer and nutrition guide",
-    year: 2023,
-    image: "https://picsum.photos/seed/fitness/400/300",
-    externalLink: "https://example.com/fitness-buddy"
-  },
-  {
-    name: "Code Mentor",
-    type: "Web Application",
-    description: "Interactive platform for learning programming",
-    year: 2022,
-    image: "https://picsum.photos/seed/codementor/400/300",
-    externalLink: "https://example.com/code-mentor"
-  },
-  {
-    name: "Travel Companion",
-    type: "Mobile App",
-    description: "Plan and organize your trips with ease",
-    year: 2021,
-    image: "https://picsum.photos/seed/travel/400/300",
-    externalLink: "https://example.com/travel-companion"
-  },
-  {
-    name: "Home Automation",
-    type: "IoT Device",
-    description: "Automate your home for convenience and efficiency",
-    year: 2020,
-    image: "https://picsum.photos/seed/automation/400/300",
-    externalLink: "https://example.com/home-automation"
-  },
-  {
-    name: "Recipe Book",
-    type: "Web Application",
-    description: "Discover and share delicious recipes",
-    year: 2021,
-    image: "https://picsum.photos/seed/recipe/400/300",
-    externalLink: "https://example.com/recipe-book"
-  },
-  {
     name: "Rubber Duck Debugger",
     type: "Web Application",
     description: "Debug your code by explaining it to a rubber duck",
-    year: 2020,
-    image: "./rubberduck.jpg",
-    externalLink: "https://example.com/rubber-duck-debugger"
+    year: 2024,
+    image: "./rubberduck.png",
+    externalLink: "https://rubberduckdebugging.vercel.app/"
+  },
+  {
+    name: "HandCamera Py App",
+    type: "Digital Art Installation",
+    description: "A Python application for hand gesture recognition and snapping photos",
+    year: 2025,
+    image: "./handsnap.png",
+    externalLink: "https://github.com/iagoViotti/handCameraPy"
+  },
+  {
+    name: "NoWaste App",
+    type: "Mobile App",
+    description: "Track and reduce food waste in your kitchen",
+    year: 2023,
+    image: "./nowasteapp.png",
+    externalLink: "https://github.com/iagoViotti/noWasteApp"
+  },
+  {
+    name: "Grupo Vitor",
+    type: "Landin Page",
+    description: "A Landing page for a paid advertising agency",
+    year: 2025,
+    image: "./grupovitor.png",
+    externalLink: "https://grupovitor.com.br/"
+  },
+  {
+    name: "Javascript Creative Coder",
+    type: "Digital Art Installation",
+    description: "A web application to showcase a collection of study purpose canvas artworks",
+    year: 2024,
+    image: "./creativecoder.png",
+    externalLink: "https://github.com/iagoViotti/creative-coder-domestika-course"
+  },
+  {
+    name: "Vekotec",
+    type: "Web Application",
+    description: "A web application for an environmental solutions company",
+    year: 2022,
+    image: "./vekotec.png",
+    externalLink: "https://vekotec.com.br/"
+  },
+  {
+    name: "My Portfolio",
+    type: "Web Application",
+    description: "My personal portfolio to showcase my work",
+    year: 2025,
+    image: "./portfolio.png",
+    externalLink: ""
   }
 ];
 
