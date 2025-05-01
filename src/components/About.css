@@ -164,7 +164,7 @@
   cursor: pointer;
 }
 
-.link-container h2 {
+.link-container a {
   font-size: 1.65em;
   margin: 0;
   margin-left: 5px;
