@@ -21,13 +21,15 @@ const About = () => {
             className="link-container"
           >
             <ArrowRight size={30} className="arrow" />
-            <h2>curriculo</h2>
+            <a
+              href="./cv.pdf" download
+            >curriculo</a>
           </label>
           <label
             className="link-container"
             onClick={() => window.open('https://github.com/iagoViotti')}>
             <ArrowRight size={30} className="arrow" />
-            <h2>github</h2>
+            <a>github</a>
           </label>
         </div>
       </div>
