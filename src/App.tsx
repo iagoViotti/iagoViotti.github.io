@@ -1,16 +1,22 @@
-import Draggable from "react-draggable"
+import Folder from "./components/Folder"
+import { useSelect } from "./context/SelectContext"
+import "./App.css"
+
 
 const App = () => {
+  const { setSelected } = useSelect()
+  const handleClick = () => {
+    setSelected('none')
+  }
   return (
-    <div className="App">
-      <h1>Welcome to the App</h1>
-      <p>This is a simple React application.</p>
-      <Draggable>
-        <div className="draggable">
-          <h2>Drag me around!</h2>
-          <p>You can drag this element anywhere on the screen.</p>
+    <div>
+      <div className="App" id="app">
+        <div className="app-background" onClick={() => handleClick()} />
+        <div className="grid">
+          <Folder name='folder_1' />
+          <Folder name='porfolio' />
         </div>
-      </Draggable>
+      </div>
     </div>
   )
 }
