@@ -1,9 +1,3 @@
-interface SphereType {
-  position: [number, number, number];
-  args: [number, number, number];
-  color: string;
-}
-
 interface Project {
   name: string;
   type: string;
@@ -14,4 +8,4 @@ interface Project {
 }
 
 
-export type { SphereType, Project };
+export type { Project };
