@@ -1,0 +1,21 @@
+.opened-folder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 60%;
+  border: 1px solid red;
+}
+
+.opened-folder-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+}

@@ -5,6 +5,8 @@ interface SelectContextType {
   setSelected: React.Dispatch<React.SetStateAction<React.ReactNode>>;
   lastTimeClicked: number;
   setLastTimeClicked: (lastTimeClicked: number) => void;
+  handleClick: (name: string) => void;
+  doubleClicked: string | null;
 }
 
 const SelectContext = createContext<SelectContextType>(
@@ -24,10 +26,20 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [selected, setSelected] = useState<React.ReactNode | null>(null);
   const [lastTimeClicked, setLastTimeClicked] = useState(0);
+  const [doubleClicked, setDoubleClicked] = useState<string | null>(null);
+
+  const handleClick = (name: string) => {
+    const currentTime = Date.now();
+    if (currentTime - lastTimeClicked < 200) {
+      setDoubleClicked(name);
+    }
+    setLastTimeClicked(currentTime);
+  }
+
 
   return (
     <SelectContext.Provider
-      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked }}
+      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked, handleClick, doubleClicked }}
     >
       {children}
     </SelectContext.Provider>
