@@ -14,7 +14,6 @@ const App = () => {
       <div className="App" id="app">
         <div className="app-background" onClick={() => handleClick()} />
         <div className="grid">
-          <Folder name='folder_1' />
           <Folder name='porfolio' />
         </div>
         <OpenedFolder />
