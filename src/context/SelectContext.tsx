@@ -30,6 +30,7 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
   const [doubleClicked, setDoubleClicked] = useState<string | null>(null);
 
   const handleClick = (name: string) => {
+    setSelected(name);
     const currentTime = Date.now();
     if (currentTime - lastTimeClicked < 200) {
       setDoubleClicked(name);

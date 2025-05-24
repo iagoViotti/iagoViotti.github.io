@@ -96,9 +96,9 @@ const OpenedFolder = () => {
             {mockData.map((item) => (
               <div key={item.name} className="opened-folder-content-items">
                 <div className="opened-folder-column-item" style={{ width: columnWidths[0] }}><p>{item.name}</p></div>
-                <div className="opened-folder-column-item" style={{ width: columnWidths[3] }}><p>{item.type}</p></div>
-                <div className="opened-folder-column-item" style={{ width: columnWidths[1] }}><p>{item.description}</p></div>
-                <div className="opened-folder-column-item" style={{ width: columnWidths[2] }}><p>{item.year}</p></div>
+                <div className="opened-folder-column-item" style={{ width: columnWidths[1] }}><p>{item.type}</p></div>
+                <div className="opened-folder-column-item" style={{ width: columnWidths[2] }}><p>{item.description}</p></div>
+                <div className="opened-folder-column-item" style={{ width: columnWidths[3] }}><p>{item.year}</p></div>
                 <div className="opened-folder-column-item" style={{ width: columnWidths[4] }}><p>{item.image}</p></div>
                 <div className="opened-folder-column-item" style={{ width: columnWidths[5] }}><p>{item.externalLink}</p></div>
               </div>
