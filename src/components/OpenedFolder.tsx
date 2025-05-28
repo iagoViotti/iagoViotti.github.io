@@ -2,35 +2,20 @@ import './OpenedFolder.css'
 import Draggable from 'react-draggable'
 import { useRef, useState } from 'react'
 import { useSelect } from '../context/SelectContext'
-import { Project } from '../types/Index'
+import { mockProjects } from '../assets/mocks'
 
-const mockData: Project[] = [
-  {
-    name: 'Project 1',
-    type: 'Type 1',
-    description: 'Description 1',
-    year: 2021,
-    image: 'image1.jpg',
-    externalLink: 'https://example.com/project1',
-  },
-  {
-    name: 'Project 2',
-    type: 'Type 2',
-    description: 'Description 2',
-    year: 2022,
-    image: 'image2.jpg',
-    externalLink: 'https://example.com/project2',
-  },
-]
 
 const columns = ['Name', 'Type', 'Description', 'Year', 'External Link'];
 
 const OpenedFolder = () => {
   const { doubleClicked, setDoubleClicked } = useSelect()
-  const [columnWidths, setColumnWidths] = useState<number[]>([200, 200, 200, 100, 200]);
+  const [columnWidths, setColumnWidths] = useState<number[]>([200, 200, 200, 80, 200]);
   const currentColIndex = useRef<number | null>(null);
   const isResizing = useRef(false)
   const [isDragging, setIsDragging] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [sortParameter, setSortParameter] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
 
   const handleMouseDown = (index: number) => {
     isResizing.current = true;
@@ -64,6 +49,34 @@ const OpenedFolder = () => {
     return col ? (col as HTMLElement).getBoundingClientRect().left : 0;
   };
 
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
+  const handleSort = (column: string) => {
+    if (sortParameter === column) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortParameter(column);
+      setSortOrder('asc');
+    }
+  };
+
+  const sortFunction = (a: any, b: any) => {
+    if (!sortParameter) return 0;
+    let comparison = 0;
+    if (sortParameter === 'Name') comparison = a.name.localeCompare(b.name);
+    else if (sortParameter === 'Type') comparison = a.type.localeCompare(b.type);
+    else if (sortParameter === 'Description') comparison = a.description.localeCompare(b.description);
+    else if (sortParameter === 'Year') comparison = a.year - b.year;
+    else if (sortParameter === 'External Link') comparison = a.externalLink.localeCompare(b.externalLink);
+    return sortOrder === 'desc' ? -comparison : comparison;
+  };
+
   if (!doubleClicked) return null;
 
   return (
@@ -84,10 +97,10 @@ const OpenedFolder = () => {
               {columns.map((col, index) => (
                 <div
                   key={index}
-                  className="column-header-cell"
+                  className={`column-header-cell ${sortParameter === col ? 'sorted' : ''}`}
                   data-index={index}
                   style={{ width: columnWidths[index] }}
-                  // onClick={() => sortByColumn(index)}
+                  onClick={() => handleSort(col)}
                 >
                   <p>{col}</p>
                   <div
@@ -98,16 +111,17 @@ const OpenedFolder = () => {
               ))}
             </div>
             <div className="opened-folder-content-items">
-              {mockData.map((item) => (
-                <div key={item.name} className="opened-folder-content-items">
-                  <div className="column-item-cell" style={{ width: columnWidths[0] }}><p>{item.name}</p></div>
-                  <div className="column-item-cell" style={{ width: columnWidths[1] }}><p>{item.type}</p></div>
-                  <div className="column-item-cell" style={{ width: columnWidths[2] }}><p>{item.description}</p></div>
-                  <div className="column-item-cell" style={{ width: columnWidths[3] }}><p>{item.year}</p></div>
-                  {/* <div className="column-item-cell" style={{ width: columnWidths[4] }}><p>{item.image}</p></div> */}
-                  <div className="column-item-cell" style={{ width: columnWidths[4] }}><p>{item.externalLink}</p></div>
-                </div>
-              ))}
+              {mockProjects
+                .sort((a, b) => sortFunction(a, b))
+                .map((item, index) => (
+                  <div key={item.name} className="opened-folder-content-items">
+                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[0] }}><p>{item.name}</p></div>
+                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[1] }}><p>{item.type}</p></div>
+                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[2] }}><p>{item.description}</p></div>
+                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[3] }}><p>{item.year}</p></div>
+                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[4] }}><p>{item.externalLink || 'N/A'}</p></div>
+                  </div>
+                ))}
             </div>
           </div>
         </div>

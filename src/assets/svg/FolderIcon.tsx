@@ -4,7 +4,7 @@ export const folderIcon = (
     height="100"
     viewBox="0 0 24 24"
     fill="#ffe7b4"
-    stroke="currentColor"
+    stroke="black"
     strokeWidth="1"
     className="folder-icon"
   >
