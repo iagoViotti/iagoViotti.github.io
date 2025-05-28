@@ -45,7 +45,9 @@ const OpenedFolder = () => {
       const newWidths = [...columnWidths];
       const newWidth = Math.max(0, e.clientX - getOffsetLeft(currentColIndex.current));
       newWidths[currentColIndex.current] = newWidth;
-
+      if (newWidths[currentColIndex.current] < 5) {
+        newWidths[currentColIndex.current] = 5
+      }
       setColumnWidths(newWidths);
     }
   }
@@ -85,6 +87,7 @@ const OpenedFolder = () => {
                   className="column-header-cell"
                   data-index={index}
                   style={{ width: columnWidths[index] }}
+                  // onClick={() => sortByColumn(index)}
                 >
                   <p>{col}</p>
                   <div
