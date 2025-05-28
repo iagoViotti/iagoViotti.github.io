@@ -1,3 +1,6 @@
+/* Sugestões de Alteração Revisadas para CSS */
+
+/* Container Principal ("Janela") */
 .opened-folder {
   position: absolute;
   top: 80px;
@@ -10,15 +13,146 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-/* .opened-folder-main {
-  height: 100%;
-  overflow: auto;
-} */
+/* Header da "Janela" (Fixo no topo) */
+.opened-folder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-bottom: 1px solid #ccc;
+  height: 2.5em;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  z-index: 10;
+}
 
-.opened-folder p {
-  padding: 2px 5px;
+/* Área de Conteúdo Scrollável (Abaixo do Header Fixo) */
+.scrollable-content {
+  flex-grow: 1;
+  overflow: auto;
+  position: relative;
+}
+
+/* Container do Grid (Dentro da Área Scrollável) */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  width: max-content;
+  /* grid-template-columns: repeat(5, minmax(100px, auto)); */
+}
+
+/* Linha de Cabeçalho de Coluna (Dentro do Grid) */
+.opened-folder-column-header {
+  display: contents;
+}
+
+/* Células de Cabeçalho de Coluna */
+.column-header-cell {
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  background-color: #f0f0f0;
+  /* Fundo para destacar */
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.column-header-cell:last-child {
+  border-right: none;
+}
+
+/* Resizer (Dentro da Célula de Cabeçalho) */
+.resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.5px;
+  height: 100%;
+  cursor: col-resize;
+  background-color: rgba(128, 128, 128, 0.384);
+  z-index: 6;
+}
+
+/* Opcional: Indicador visual para o resizer no hover */
+.resizer:hover {
+  background-color: rgba(0, 0, 255, 0.3);
+}
+
+/* Linha de Itens (Dentro do Grid) */
+.opened-folder-content-items {
+  display: contents;
+  /* Faz com que as células de item sejam itens diretos do grid */
+  /* Os estilos visuais vão para as células individuais abaixo */
+}
+
+/* Células de Item */
+.column-item-cell {
+  /* Aplicar esta classe a cada célula <td> ou <div> de item */
+  border-bottom: 1px solid #eee;
+  /* Linha mais suave entre itens */
+  border-right: 1px solid #eee;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.column-item-cell:last-child {
+  border-right: none;
+}
+
+/* Remover/Ajustar Estilos Antigos Conflitantes */
+.opened-folder-column-header p,
+/* Se o <p> ainda existir dentro da célula */
+.opened-folder-column-item p {
+  margin: 0;
+  display: block;
+  /* Garante que ocupe a célula se ainda usar <p> */
+  overflow: hidden;
+  /* Redundante se a célula já tem */
+  text-overflow: ellipsis;
+  /* Redundante se a célula já tem */
+  white-space: nowrap;
+  /* Redundante se a célula já tem */
+}
+
+/* Estilos de arrastar (mantidos) */
+.dragging .opened-folder {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.dragging .opened-folder-header {
+  background-color: #dadada;
+}
+
+
+
+/* .opened-folder {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 800px;
+  height: 400px;
+  border: 1px solid #ccc;
+  background-color: var(--background);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow-x: scroll;
+}
+
+.dragging .opened-folder {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .opened-folder-header {
@@ -29,9 +163,12 @@
   background-color: #e0e0e0;
   border-bottom: 1px solid #ccc;
   position: sticky;
-  width: 100%;
   height: 2.5em;
   box-sizing: border-box;
+}
+
+.dragging .opened-folder-header {
+  background-color: #dadada;
 }
 
 .opened-folder-header-title {
@@ -84,19 +221,12 @@
 }
 
 .opened-folder-column-item {
-  display: flex;
   border-right: 1px solid #ccc;
 }
 
 .opened-folder-column-item p {
   margin: 0;
-  padding: 2px 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.opened-folder-content {
-  overflow-y: auto;
-  overflow-x: auto;
-}
+} */
