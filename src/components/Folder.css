@@ -12,9 +12,9 @@
 }
 
 .folder:hover {
-  background-color: #cecece93;
+  background-color: #cfcfcf80;
 }
 
-.selected {
+.folder.selected {
   border: 1px dashed #000;
 }

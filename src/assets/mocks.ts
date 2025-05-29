@@ -27,7 +27,7 @@ export const mockProjects: Project[] = [
   },
   {
     name: "Grupo Vitor",
-    type: "Landin Page",
+    type: "Landing Page",
     description: "A Landing page for a paid advertising agency",
     year: 2025,
     image: "./grupovitor.png",

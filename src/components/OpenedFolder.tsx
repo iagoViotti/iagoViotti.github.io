@@ -8,7 +8,7 @@ import { mockProjects } from '../assets/mocks'
 const columns = ['Name', 'Type', 'Description', 'Year', 'External Link'];
 
 const OpenedFolder = () => {
-  const { doubleClicked, setDoubleClicked } = useSelect()
+  const { doubleClicked, setDoubleClicked, selected, handleClick } = useSelect()
   const [columnWidths, setColumnWidths] = useState<number[]>([200, 200, 200, 80, 200]);
   const currentColIndex = useRef<number | null>(null);
   const isResizing = useRef(false)
@@ -114,11 +114,44 @@ const OpenedFolder = () => {
                 .sort((a, b) => sortFunction(a, b))
                 .map((item, index) => (
                   <div key={item.name} className="opened-folder-content-items">
-                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[0] }}><p>{item.name}</p></div>
-                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[1] }}><p>{item.type}</p></div>
-                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[2] }}><p>{item.description}</p></div>
-                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[3] }}><p>{item.year}</p></div>
-                    <div className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''}`} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()} style={{ width: columnWidths[4] }}><p>{item.externalLink || 'N/A'}</p></div>
+                    <div
+                      className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
+                      onMouseEnter={() => handleMouseEnter(index)}
+                      onMouseLeave={() => handleMouseLeave()}
+                      onClick={() => handleClick(item.name)}
+                      style={{ width: columnWidths[0] }}>
+                      <p>{item.name}</p>
+                    </div>
+                    <div
+                      className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
+                      onMouseEnter={() => handleMouseEnter(index)}
+                      onMouseLeave={() => handleMouseLeave()}
+                      onClick={() => handleClick(item.name)}
+                      style={{ width: columnWidths[1] }}>
+                      <p>{item.type}</p>
+                    </div>
+                    <div
+                      className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
+                      onMouseEnter={() => handleMouseEnter(index)}
+                      onMouseLeave={() => handleMouseLeave()}
+                      onClick={() => handleClick(item.name)}
+                      style={{ width: columnWidths[2] }}>
+                      <p>{item.description}</p>
+                    </div>
+                    <div
+                      className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
+                      onMouseEnter={() => handleMouseEnter(index)}
+                      onMouseLeave={() => handleMouseLeave()}
+                      onClick={() => handleClick(item.name)}
+                      style={{ width: columnWidths[3] }}>
+                      <p>{item.year}</p>
+                    </div>
+                    <div
+                      className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
+                      onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()}
+                      style={{ width: columnWidths[4] }}>
+                      <p>{item.externalLink || 'N/A'}</p>
+                    </div>
                   </div>
                 ))}
             </div>
