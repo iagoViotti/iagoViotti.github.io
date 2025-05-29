@@ -100,9 +100,8 @@ const OpenedFolder = () => {
                   className={`column-header-cell ${sortParameter === col ? 'sorted' : ''}`}
                   data-index={index}
                   style={{ width: columnWidths[index] }}
-                  onClick={() => handleSort(col)}
                 >
-                  <p>{col}</p>
+                  <p onClick={() => handleSort(col)} >{col}</p>
                   <div
                     className="resizer"
                     onMouseDown={() => handleMouseDown(index)}
