@@ -1,13 +1,15 @@
 import { createContext, useContext, useState } from "react";
+import { Window, IFolder, IProject } from "../types/Index";
+// import Folder from "../components/Folder";
 
 interface SelectContextType {
   selected: React.ReactNode | null
   setSelected: React.Dispatch<React.SetStateAction<React.ReactNode>>;
   lastTimeClicked: number;
   setLastTimeClicked: (lastTimeClicked: number) => void;
-  handleClick: (name: string) => void;
-  doubleClicked: string | null;
-  setDoubleClicked: React.Dispatch<React.SetStateAction<string | null>>
+  handleClick: (window: Window) => void;
+  doubleClicked: { folder: IFolder | null; file: IProject | null }
+  setDoubleClicked: React.Dispatch<React.SetStateAction<{ folder: IFolder | null; file: IProject | null }>>
 }
 
 const SelectContext = createContext<SelectContextType>(
@@ -27,17 +29,21 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [selected, setSelected] = useState<React.ReactNode | null>(null);
   const [lastTimeClicked, setLastTimeClicked] = useState(0);
-  const [doubleClicked, setDoubleClicked] = useState<string | null>(null);
+  const [doubleClicked, setDoubleClicked] = useState<{ folder: IFolder | null; file: IProject | null }>({ folder: null, file: null })
 
-  const handleClick = (name: string) => {
-    setSelected(name);
+  const handleClick = (window: Window) => {
+    setSelected(window.name);
     const currentTime = Date.now();
     if (currentTime - lastTimeClicked < 200) {
-      setDoubleClicked(name);
+      if (window.name && 'Files' in window) {
+        setDoubleClicked({ folder: window as IFolder, file: null })
+      }
+      else {
+        setDoubleClicked(prevstate => ({ ...prevstate, file: window as IProject }))
+      }
     }
     setLastTimeClicked(currentTime);
   }
-
 
   return (
     <SelectContext.Provider

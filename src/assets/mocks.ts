@@ -1,6 +1,6 @@
-import { Project } from '../types/Index';
+import { IProject, IFolder } from '../types/Index';
 
-export const mockProjects: Project[] = [
+const projects: IProject[] = [
   {
     name: "Rubber Duck Debugger",
     type: "Web Application",
@@ -59,3 +59,7 @@ export const mockProjects: Project[] = [
   }
 ];
 
+export const portfolio: IFolder = {
+  name: "portfolio",
+  Files: projects,
+}

@@ -2,8 +2,9 @@ import Draggable from "react-draggable"
 import './Folder.css'
 import { useSelect } from "../context/SelectContext"
 import { folderIcon } from "../assets/svg/FolderIcon"
+import { IFolder } from "../types/Index"
 
-const Folder = (props: { name: string }) => {
+const Folder = (props: IFolder) => {
   const { name } = props
   const { selected, handleClick } = useSelect()
 
@@ -11,7 +12,7 @@ const Folder = (props: { name: string }) => {
     <Draggable bounds={'body'}>
       <div
         className={`folder ${selected === name ? "selected" : ""}`}
-        onClick={() => handleClick(name)}
+        onClick={() => handleClick(props)}
       >
         {folderIcon}
         <p>{name}</p>

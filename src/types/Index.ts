@@ -1,4 +1,4 @@
-interface Project {
+interface IProject {
   name: string;
   type: string;
   description: string;
@@ -7,5 +7,11 @@ interface Project {
   externalLink: string;
 }
 
+interface IFolder {
+  name: string;
+  Files: IProject[];
+}
 
-export type { Project };
+type Window = IFolder | IProject
+
+export type { IProject, Window, IFolder };

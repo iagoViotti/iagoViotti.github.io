@@ -2,14 +2,13 @@ import './OpenedFolder.css'
 import Draggable from 'react-draggable'
 import { useRef, useState } from 'react'
 import { useSelect } from '../context/SelectContext'
-import { mockProjects } from '../assets/mocks'
-
+// import { projects } from '../assets/mocks'
 
 const columns = ['Name', 'Type', 'Description', 'Year', 'External Link'];
 
 const OpenedFolder = () => {
   const { doubleClicked, setDoubleClicked, selected, handleClick } = useSelect()
-  const [columnWidths, setColumnWidths] = useState<number[]>([200, 200, 200, 80, 200]);
+  const [columnWidths, setColumnWidths] = useState<number[]>([200, 150, 200, 80, 200]);
   const currentColIndex = useRef<number | null>(null);
   const isResizing = useRef(false)
   const [isDragging, setIsDragging] = useState(false);
@@ -20,7 +19,6 @@ const OpenedFolder = () => {
   const handleMouseDown = (index: number) => {
     isResizing.current = true;
     currentColIndex.current = index
-
     document.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('mouseup', handleMouseUp)
   }
@@ -77,15 +75,15 @@ const OpenedFolder = () => {
     return sortOrder === 'desc' ? -comparison : comparison;
   };
 
-  if (!doubleClicked) return null;
+  if (!doubleClicked.folder) return null;
 
   return (
     <Draggable bounds={'body'} handle=".opened-folder-header" onStart={() => setIsDragging(true)} onStop={() => setIsDragging(false)}>
       <div className={`opened-folder ${isDragging ? 'dragging' : ''}`}>
         <div className="opened-folder-header">
-          <div className="opened-folder-header-title">{doubleClicked}</div>
+          <div className="opened-folder-header-title">{doubleClicked.folder?.name as string}</div>
           <button
-            onClick={() => { setDoubleClicked(null) }}
+            onClick={() => { setDoubleClicked({ folder: null, file: null }) }}
             className="opened-folder-header-close"
           >
             X
@@ -110,7 +108,7 @@ const OpenedFolder = () => {
               ))}
             </div>
             <div className="opened-folder-content-items">
-              {mockProjects
+              {doubleClicked.folder?.Files
                 .sort((a, b) => sortFunction(a, b))
                 .map((item, index) => (
                   <div key={item.name} className="opened-folder-content-items">
@@ -118,7 +116,7 @@ const OpenedFolder = () => {
                       className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={() => handleMouseLeave()}
-                      onClick={() => handleClick(item.name)}
+                      onClick={() => handleClick(item)}
                       style={{ width: columnWidths[0] }}>
                       <p>{item.name}</p>
                     </div>
@@ -126,7 +124,7 @@ const OpenedFolder = () => {
                       className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={() => handleMouseLeave()}
-                      onClick={() => handleClick(item.name)}
+                      onClick={() => handleClick(item)}
                       style={{ width: columnWidths[1] }}>
                       <p>{item.type}</p>
                     </div>
@@ -134,7 +132,7 @@ const OpenedFolder = () => {
                       className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={() => handleMouseLeave()}
-                      onClick={() => handleClick(item.name)}
+                      onClick={() => handleClick(item)}
                       style={{ width: columnWidths[2] }}>
                       <p>{item.description}</p>
                     </div>
@@ -142,7 +140,7 @@ const OpenedFolder = () => {
                       className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={() => handleMouseLeave()}
-                      onClick={() => handleClick(item.name)}
+                      onClick={() => handleClick(item)}
                       style={{ width: columnWidths[3] }}>
                       <p>{item.year}</p>
                     </div>
