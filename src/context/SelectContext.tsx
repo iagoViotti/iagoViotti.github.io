@@ -10,6 +10,7 @@ interface SelectContextType {
   handleClick: (window: Window) => void;
   doubleClicked: { folder: IFolder | null; file: IProject | null }
   setDoubleClicked: React.Dispatch<React.SetStateAction<{ folder: IFolder | null; file: IProject | null }>>
+  handleDoubleClick: (window: Window) => void
 }
 
 const SelectContext = createContext<SelectContextType>(
@@ -33,21 +34,20 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const handleClick = (window: Window) => {
     setSelected(window.name);
-    const currentTime = Date.now();
-    if (currentTime - lastTimeClicked < 200) {
-      if (window.name && 'Files' in window) {
-        setDoubleClicked({ folder: window as IFolder, file: null })
-      }
-      else {
-        setDoubleClicked(prevstate => ({ ...prevstate, file: window as IProject }))
-      }
+  }
+
+  const handleDoubleClick = (window: Window) => {
+    if (window.name && 'Files' in window) {
+      setDoubleClicked({ folder: window as IFolder, file: null })
     }
-    setLastTimeClicked(currentTime);
+    else {
+      setDoubleClicked(prevstate => ({ ...prevstate, file: window as IProject }))
+    }
   }
 
   return (
     <SelectContext.Provider
-      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked, handleClick, doubleClicked, setDoubleClicked }}
+      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked, handleClick, doubleClicked, setDoubleClicked, handleDoubleClick }}
     >
       {children}
     </SelectContext.Provider>

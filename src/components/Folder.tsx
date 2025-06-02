@@ -6,14 +6,28 @@ import { IFolder } from "../types/Index"
 
 const Folder = (props: IFolder) => {
   const { name } = props
-  const { selected, handleClick } = useSelect()
+  const { selected, handleClick, handleDoubleClick } = useSelect()
+
+  const isMobile = window.innerWidth < 768
+
+  if (isMobile) {
+    return (
+      <div
+        className={`folder ${selected === name ? "selected" : ""}`}
+        onClick={() => handleDoubleClick(props)}
+      >
+        {folderIcon}
+        <p>{name}</p>
+      </div>
+    )
+  }
 
   return (
     <Draggable bounds={'body'}>
       <div
         className={`folder ${selected === name ? "selected" : ""}`}
-        onClick={() => handleClick(props)
-        }
+        onClick={() => handleClick(props)}
+        onDoubleClick={() => handleDoubleClick(props)}
       >
         {folderIcon}
         <p>{name}</p>

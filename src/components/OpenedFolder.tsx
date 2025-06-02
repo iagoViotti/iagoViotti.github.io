@@ -7,7 +7,7 @@ import { useSelect } from '../context/SelectContext'
 const columns = ['Name', 'Type', 'Description', 'Year', 'External Link'];
 
 const OpenedFolder = () => {
-  const { doubleClicked, setDoubleClicked, selected, handleClick } = useSelect()
+  const { doubleClicked, setDoubleClicked, selected, handleClick, handleDoubleClick } = useSelect()
   const [columnWidths, setColumnWidths] = useState<number[]>([200, 150, 200, 80, 200]);
   const currentColIndex = useRef<number | null>(null);
   const isResizing = useRef(false)
@@ -117,6 +117,7 @@ const OpenedFolder = () => {
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={() => handleMouseLeave()}
                       onClick={() => handleClick(item)}
+                      onDoubleClick={() => handleDoubleClick(item)}
                       style={{ width: columnWidths[0] }}>
                       <p>{item.name}</p>
                     </div>
@@ -125,6 +126,7 @@ const OpenedFolder = () => {
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={() => handleMouseLeave()}
                       onClick={() => handleClick(item)}
+                      onDoubleClick={() => handleDoubleClick(item)}
                       style={{ width: columnWidths[1] }}>
                       <p>{item.type}</p>
                     </div>
@@ -133,6 +135,7 @@ const OpenedFolder = () => {
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={() => handleMouseLeave()}
                       onClick={() => handleClick(item)}
+                      onDoubleClick={() => handleDoubleClick(item)}
                       style={{ width: columnWidths[2] }}>
                       <p>{item.description}</p>
                     </div>
@@ -141,6 +144,7 @@ const OpenedFolder = () => {
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={() => handleMouseLeave()}
                       onClick={() => handleClick(item)}
+                      onDoubleClick={() => handleDoubleClick(item)}
                       style={{ width: columnWidths[3] }}>
                       <p>{item.year}</p>
                     </div>

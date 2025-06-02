@@ -18,3 +18,12 @@
   flex-wrap: wrap;
   flex-direction: column;
 }
+
+@media screen {
+  @media (max-width: 768px) {
+    .app-background {
+
+      z-index: -1;
+    }
+  }
+}
