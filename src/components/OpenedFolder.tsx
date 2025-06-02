@@ -47,14 +47,6 @@ const OpenedFolder = () => {
     return col ? (col as HTMLElement).getBoundingClientRect().left : 0;
   };
 
-  const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
-
   const handleSort = (column: string) => {
     if (sortParameter === column) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -114,8 +106,8 @@ const OpenedFolder = () => {
                   <div key={item.name} className="opened-folder-content-items">
                     <div
                       className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                      onMouseEnter={() => handleMouseEnter(index)}
-                      onMouseLeave={() => handleMouseLeave()}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
                       onClick={() => handleClick(item)}
                       onDoubleClick={() => handleDoubleClick(item)}
                       style={{ width: columnWidths[0] }}>
@@ -123,8 +115,8 @@ const OpenedFolder = () => {
                     </div>
                     <div
                       className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                      onMouseEnter={() => handleMouseEnter(index)}
-                      onMouseLeave={() => handleMouseLeave()}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
                       onClick={() => handleClick(item)}
                       onDoubleClick={() => handleDoubleClick(item)}
                       style={{ width: columnWidths[1] }}>
@@ -132,8 +124,8 @@ const OpenedFolder = () => {
                     </div>
                     <div
                       className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                      onMouseEnter={() => handleMouseEnter(index)}
-                      onMouseLeave={() => handleMouseLeave()}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
                       onClick={() => handleClick(item)}
                       onDoubleClick={() => handleDoubleClick(item)}
                       style={{ width: columnWidths[2] }}>
@@ -141,8 +133,8 @@ const OpenedFolder = () => {
                     </div>
                     <div
                       className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                      onMouseEnter={() => handleMouseEnter(index)}
-                      onMouseLeave={() => handleMouseLeave()}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
                       onClick={() => handleClick(item)}
                       onDoubleClick={() => handleDoubleClick(item)}
                       style={{ width: columnWidths[3] }}>
@@ -150,7 +142,7 @@ const OpenedFolder = () => {
                     </div>
                     <div
                       className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                      onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave()}
+                      onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}
                       style={{ width: columnWidths[4] }}>
                       <p>{item.externalLink || 'N/A'}</p>
                     </div>
