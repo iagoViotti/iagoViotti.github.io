@@ -1,4 +1,5 @@
 import Folder from "./components/Folder"
+import OpenedFile from "./components/OpenedFile"
 import OpenedFolder from "./components/OpenedFolder"
 import { useSelect } from "./context/SelectContext"
 import "./App.css"
@@ -12,11 +13,12 @@ const App = () => {
   }
   return (
     <div>
+      <div className="app-background" onClick={() => handleClick()} />
       <div className="App" id="app">
-        <div className="app-background" onClick={() => handleClick()} />
         <div className="grid">
           <Folder {...portfolio} />
         </div>
+        <OpenedFile />
         <OpenedFolder />
       </div>
     </div>

@@ -1,0 +1,59 @@
+.opened-file {
+  position: absolute;
+  top: 140px;
+  left: 300px;
+  width: 1000px;
+  height: 540px;
+  border: 1px solid #ccc;
+  box-shadow: 8px 8px black;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* border: 2px solid #b9b9b9; */
+  border: 3px solid black;
+  box-sizing: border-box;
+  z-index: 1;
+  background-color: var(--background);
+}
+
+.opened-file-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #fee7b3;
+  border-bottom: 2px solid black;
+  height: 2.8em;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.opened-file-header-title {
+  font-size: 1.2em;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+.dragging .opened-file-header {
+  background-color: #ecd7a7;
+}
+
+.opened-file-header-close {
+  cursor: pointer;
+  background-color: #f1f1f1;
+  border: 2px solid black;
+  font-size: 1em;
+  color: black;
+  font-weight: bolder;
+  padding: 2px 6px;
+}
+
+/* 
+.scrollable-content {
+  flex-grow: 1;
+  overflow: auto;
+  position: relative;
+} */

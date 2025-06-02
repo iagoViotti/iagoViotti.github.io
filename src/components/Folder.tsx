@@ -12,7 +12,8 @@ const Folder = (props: IFolder) => {
     <Draggable bounds={'body'}>
       <div
         className={`folder ${selected === name ? "selected" : ""}`}
-        onClick={() => handleClick(props)}
+        onClick={() => handleClick(props)
+        }
       >
         {folderIcon}
         <p>{name}</p>
