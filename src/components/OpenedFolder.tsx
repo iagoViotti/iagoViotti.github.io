@@ -1,13 +1,15 @@
 import './OpenedFolder.css'
 import Draggable from 'react-draggable'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useSelect } from '../context/SelectContext'
-// import { projects } from '../assets/mocks'
+import File from './File'
+
+type ViewStyle = 'list' | 'icon';
 
 const columns = ['Name', 'Type', 'Description', 'Year', 'External Link'];
 
 const OpenedFolder = () => {
-  const { doubleClicked, setDoubleClicked, selected, handleClick, handleDoubleClick } = useSelect()
+  const { doubleClicked, setDoubleClicked, selected, handleClick, handleDoubleClick, mousePosition, setMousePosition } = useSelect()
   const [columnWidths, setColumnWidths] = useState<number[]>([200, 150, 200, 80, 200]);
   const currentColIndex = useRef<number | null>(null);
   const isResizing = useRef(false)
@@ -15,6 +17,41 @@ const OpenedFolder = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [sortParameter, setSortParameter] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
+  const [shadowStyle, setShadowStyle] = useState({ boxShadow: '0px 0px 0px rgba(0, 0, 0, 0.5)' });
+  const [viewStyle, setViewStyle] = useState<ViewStyle>('icon');
+
+  // useEffect(() => {
+  //   const handleMouseMove = (event: MouseEvent) => {
+  //     setMousePosition({ x: event.clientX, y: event.clientY });
+  //   };
+
+  //   document.addEventListener('mousemove', handleMouseMove);
+
+  //   return () => {
+  //     document.removeEventListener('mousemove', handleMouseMove);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   const shadowX = mousePosition.x - (window.innerWidth / 2);
+  //   const shadowY = mousePosition.y - (window.innerHeight / 2);
+  //   setShadowStyle({
+  //     boxShadow: `${shadowX}px ${shadowY}px rgb(0, 0, 0)`,
+  //   });
+
+  //   const folder = document.getElementById('opened-folder');
+  //   const folderTranslateStyleValue = folder ? folder.style.getPropertyValue('transform') : '';
+  //   const translateValue = folderTranslateStyleValue.replace('translate(', '').replace(')', '');
+  //   const translateX = parseFloat(translateValue.split(',')[0]);
+  //   const translateY = parseFloat(translateValue.split(',')[1]);
+  //   const folderCenterX = folder ? (folder.offsetLeft + folder.offsetWidth / 2) - translateX : 0;
+  //   const folderCenterY = folder ? (folder.offsetTop + folder.offsetHeight / 2) - translateY : 0;
+
+  //   console.log(`Mouse Position: (${mousePosition.x}, ${mousePosition.y})
+  //     Folder Center: (${folderCenterX}, ${folderCenterY})
+  //     `);
+
+  // }, [mousePosition]);
 
   const handleMouseDown = (index: number) => {
     isResizing.current = true;
@@ -71,7 +108,7 @@ const OpenedFolder = () => {
 
   return (
     <Draggable bounds={'body'} handle=".opened-folder-header" onStart={() => setIsDragging(true)} onStop={() => setIsDragging(false)}>
-      <div className={`opened-folder ${isDragging ? 'dragging' : ''}`}>
+      <div id='opened-folder' className={`opened-folder ${isDragging ? 'dragging' : ''}`} style={shadowStyle}>
         <div className="opened-folder-header">
           <div className="opened-folder-header-title">{doubleClicked.folder?.name as string}</div>
           <button
@@ -82,7 +119,7 @@ const OpenedFolder = () => {
           </button>
         </div>
         <div className='scrollable-content'>
-          <div className='grid-container'>
+          {viewStyle === 'list' ? <div className='grid-container'>
             <div className="opened-folder-column-header">
               {columns.map((col, index) => (
                 <div
@@ -149,7 +186,13 @@ const OpenedFolder = () => {
                   </div>
                 ))}
             </div>
-          </div>
+          </div> : doubleClicked.folder?.Files.map((item, index) => (
+            <File
+              {...item}
+              key={index}
+            />
+
+          ))}
         </div>
       </div>
     </Draggable>

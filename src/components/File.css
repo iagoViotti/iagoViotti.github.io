@@ -1,0 +1,20 @@
+.file {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  text-align: center;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.file:hover {
+  background-color: #cfcfcf80;
+}
+
+.file.selected {
+  border: 1px dashed #000;
+}

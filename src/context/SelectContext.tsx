@@ -10,7 +10,9 @@ interface SelectContextType {
   handleClick: (window: Window) => void;
   doubleClicked: { folder: IFolder | null; file: IProject | null }
   setDoubleClicked: React.Dispatch<React.SetStateAction<{ folder: IFolder | null; file: IProject | null }>>
-  handleDoubleClick: (window: Window) => void
+  handleDoubleClick: (window: Window) => void;
+  mousePosition: { x: number; y: number };
+  setMousePosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>
 }
 
 const SelectContext = createContext<SelectContextType>(
@@ -31,6 +33,7 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
   const [selected, setSelected] = useState<React.ReactNode | null>(null);
   const [lastTimeClicked, setLastTimeClicked] = useState(0);
   const [doubleClicked, setDoubleClicked] = useState<{ folder: IFolder | null; file: IProject | null }>({ folder: null, file: null })
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleClick = (window: Window) => {
     setSelected(window.name);
@@ -47,7 +50,7 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <SelectContext.Provider
-      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked, handleClick, doubleClicked, setDoubleClicked, handleDoubleClick }}
+      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked, handleClick, doubleClicked, setDoubleClicked, handleDoubleClick, mousePosition, setMousePosition }}
     >
       {children}
     </SelectContext.Provider>

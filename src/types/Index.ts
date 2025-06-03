@@ -5,6 +5,7 @@ interface IProject {
   year: number;
   image: string;
   externalLink: string;
+  mainStack: MainStack;
 }
 
 interface IFolder {
@@ -12,6 +13,8 @@ interface IFolder {
   Files: IProject[];
 }
 
+type MainStack = 'React' | 'Python' | 'Wordpress' | 'Javascript';
+
 type Window = IFolder | IProject
 
-export type { IProject, Window, IFolder };
+export type { IProject, Window, IFolder, MainStack };
