@@ -1,4 +1,3 @@
-import Draggable from "react-draggable"
 import './File.css'
 import { useSelect } from "../context/SelectContext"
 import { fileIcon } from "../assets/svg/FileIcon"
@@ -11,31 +10,16 @@ const File = (props: IProject) => {
 
   const isMobile = window.innerWidth < 768
 
-  if (isMobile) {
-    return (
-      <div
-        className={`file ${selected === name ? "selected" : ""}`}
-        onClick={() => handleDoubleClick(props)}
-      >
-        {/* {mapTechIcon[mainStack]} */}
-        {fileIcon}
-        <p>{name}</p>
-      </div>
-    )
-  }
-
   return (
-    <Draggable bounds={'body'}>
       <div
         className={`file ${selected === name ? "selected" : ""}`}
-        onClick={() => handleClick(props)}
-        onDoubleClick={() => handleDoubleClick(props)}
+        onClick={() => {isMobile ? handleDoubleClick(props) : handleClick(props)}}
+        onDoubleClick={() => {!isMobile && handleDoubleClick(props)}}
       >
         {/* {mapTechIcon[mainStack]} */}
         {fileIcon}
         <p>{name}</p>
       </div>
-    </Draggable>
   )
 }
 

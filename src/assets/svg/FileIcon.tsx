@@ -4,6 +4,7 @@ export const fileIcon = (
     width="64px"
     height="64px"
     viewBox="-3.2 -3.2 38.40 38.40"
+    // viewBox="0 0 40 40"
     stroke="black"
     strokeWidth="0"
     className="folder-icon"

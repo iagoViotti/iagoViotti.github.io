@@ -162,3 +162,8 @@
 .column-item-cell.selected {
   background-color: #fee7b3;
 }
+
+.icon-content {
+  display: flex;
+  flex-wrap: wrap;
+}

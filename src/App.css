@@ -22,7 +22,6 @@
 @media screen {
   @media (max-width: 768px) {
     .app-background {
-
       z-index: -1;
     }
   }
