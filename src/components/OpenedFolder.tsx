@@ -4,13 +4,15 @@ import { useRef, useState, useEffect } from 'react'
 import { useSelect } from '../context/SelectContext'
 import File from './File'
 import { IProject } from '../types/Index'
+import { gridIcon } from '../assets/svg/GridIcon'
+import { listIcon } from '../assets/svg/ListIcon'
 
 type ViewStyle = 'list' | 'icon';
 
 const columns = ['Name', 'Type', 'Description', 'Year', 'External Link'];
 
 const OpenedFolder = () => {
-  const { doubleClicked, setDoubleClicked, selected, handleClick, handleDoubleClick, mousePosition, setMousePosition } = useSelect()
+  const { doubleClicked, setDoubleClicked, selected, handleClick, handleDoubleClick, mousePosition, setMousePosition, setSelected } = useSelect()
   const [columnWidths, setColumnWidths] = useState<number[]>([200, 150, 200, 80, 200]);
   const currentColIndex = useRef<number | null>(null);
   const isResizing = useRef(false)
@@ -20,6 +22,11 @@ const OpenedFolder = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
   const [shadowStyle, setShadowStyle] = useState({ boxShadow: '0px 0px 0px rgba(0, 0, 0, 0.5)' });
   const [viewStyle, setViewStyle] = useState<ViewStyle>('icon');
+  const isMobile = window.innerWidth <= 768;
+
+  const toggleViewStyle = () => {
+    setViewStyle(viewStyle === 'icon' ? 'list' : 'icon');
+  };
 
   // useEffect(() => {
   //   const handleMouseMove = (event: MouseEvent) => {
@@ -114,12 +121,18 @@ const OpenedFolder = () => {
           <div className="opened-folder-header-title">
             {doubleClicked.folder?.name}
           </div>
-          <button
-            onClick={() => { setDoubleClicked({ folder: null, file: null }) }}
-            className="opened-folder-header-close"
-          >
-            X
-          </button>
+          <div className='opened-folder-header-buttons'>
+            {!isMobile && <button onClick={() => toggleViewStyle()}
+              className="opened-folder-header-view">
+              {viewStyle === 'list' ? gridIcon : listIcon}
+            </button>}
+            <button
+              onClick={() => { setDoubleClicked({ folder: null, file: null }) }}
+              className="opened-folder-header-close"
+            >
+              X
+            </button>
+          </div>
         </div>
         {viewStyle === 'list'
           ?

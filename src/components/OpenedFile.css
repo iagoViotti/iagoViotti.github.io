@@ -51,9 +51,7 @@
   padding: 2px 6px;
 }
 
-/* 
-.scrollable-content {
-  flex-grow: 1;
+.opened-file-content {
   overflow: auto;
-  position: relative;
-} */
+  
+}
