@@ -41,9 +41,8 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const handleDoubleClick = (window: Window) => {
     if (window.name && 'Files' in window) {
-      setDoubleClicked({ folder: window as IFolder, file: null })
-    }
-    else {
+      setDoubleClicked(prevstate => ({ ...prevstate, folder: window as IFolder }))
+    } else {
       setDoubleClicked(prevstate => ({ ...prevstate, file: window as IProject }))
     }
   }
