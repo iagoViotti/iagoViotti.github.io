@@ -35,7 +35,7 @@ const projects: IProject[] = [
     year: 2025,
     image: "./grupovitor.png",
     externalLink: "https://grupovitor.com.br/",
-    mainStack: "WordPress"
+    mainStack: "Wordpress"
   },
   {
     name: "Javascript Creative Coder",
@@ -44,7 +44,7 @@ const projects: IProject[] = [
     year: 2024,
     image: "./creativecoder.png",
     externalLink: "https://github.com/iagoViotti/creative-coder-domestika-course",
-    mainStack: "JavaScript"
+    mainStack: "Javascript"
   },
   {
     name: "Vekotec",

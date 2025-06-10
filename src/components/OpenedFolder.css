@@ -27,8 +27,6 @@
   border-bottom: 2px solid black;
   height: 2.8em;
   box-sizing: border-box;
-  /* flex-shrink: 0; */
-  z-index: 10;
 }
 
 .opened-folder-header-title {
@@ -177,4 +175,31 @@
 .icon-content {
   display: flex;
   flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+  .opened-folder {
+    width: 100vw;
+    height: 100dvh;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+  }
+
+  .opened-folder-header-close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 1.2em;
+  }
+
+
+  .icon-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    overflow: auto;
+  }
 }

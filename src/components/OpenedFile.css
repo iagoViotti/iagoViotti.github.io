@@ -53,5 +53,21 @@
 
 .opened-file-content {
   overflow: auto;
-  
+}
+
+@media screen and (max-width: 768px) {
+  .opened-file {
+    width: 100vw;
+    height: 100dvh;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+  }
+
+  .opened-file-header-close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 1.2em;
+  }
 }
