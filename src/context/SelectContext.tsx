@@ -13,6 +13,8 @@ interface SelectContextType {
   handleDoubleClick: (window: Window) => void;
   mousePosition: { x: number; y: number };
   setMousePosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>
+  handlePrevFile: () => void;
+  handleNextFile: () => void;
 }
 
 const SelectContext = createContext<SelectContextType>(
@@ -35,6 +37,26 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
   const [doubleClicked, setDoubleClicked] = useState<{ folder: IFolder | null; file: IProject | null }>({ folder: null, file: null })
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  const filesInFolder = doubleClicked.folder?.Files || [];
+
+// Find the index of the current file
+const currentIndex = filesInFolder.findIndex((file) => file.name === doubleClicked?.file?.name);
+
+// Navigation buttons
+const handlePrevFile = () => {
+  if (currentIndex > 0) {
+    const prevFile = filesInFolder[currentIndex - 1];
+    setDoubleClicked({ folder: doubleClicked.folder, file: prevFile });
+  }
+};
+
+const handleNextFile = () => {
+  if (currentIndex < filesInFolder.length - 1) {
+    const nextFile = filesInFolder[currentIndex + 1];
+    setDoubleClicked({ folder: doubleClicked.folder, file: nextFile });
+  }
+};
+  
   const handleClick = (window: Window) => {
     setSelected(window.name);
   }
@@ -49,7 +71,7 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <SelectContext.Provider
-      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked, handleClick, doubleClicked, setDoubleClicked, handleDoubleClick, mousePosition, setMousePosition }}
+      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked, handleClick, doubleClicked, setDoubleClicked, handleDoubleClick, mousePosition, setMousePosition, handlePrevFile, handleNextFile }}
     >
       {children}
     </SelectContext.Provider>
