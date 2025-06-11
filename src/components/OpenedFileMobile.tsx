@@ -2,7 +2,7 @@ import './OpenedFile.css'
 import { useSelect } from '../context/SelectContext'
 
 const OpenedFileMobile = () => {
-  const { doubleClicked, setDoubleClicked } = useSelect()
+  const { doubleClicked, setDoubleClicked, handleNextFile, handlePrevFile } = useSelect()
 
   if (!doubleClicked.file) return null;
 
@@ -10,12 +10,16 @@ const OpenedFileMobile = () => {
     <div className='opened-file'>
       <div className="opened-file-header">
         <div className="opened-file-header-title">{doubleClicked.file.name}</div>
-        <button
-          onClick={() => { setDoubleClicked(prev => ({ ...prev, file: null })) }}
-          className="opened-folder-header-close"
-        >
-          X
-        </button>
+        <div className='opened-file-header-buttons'>
+          <button onClick={() => handlePrevFile()} >&lt;</button>
+          <button onClick={() => handleNextFile()} >&gt;</button>
+          <button
+            onClick={() => { setDoubleClicked(prev => ({ ...prev, file: null })) }}
+            className="opened-file-header-close"
+          >
+            X
+          </button>
+        </div>
       </div>
       <div className="opened-file-content">
         <p>{doubleClicked.file.description}</p>

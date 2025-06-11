@@ -1,18 +1,7 @@
 import './OpenedFolder.css'
-import { useRef, useState } from 'react'
 import { useSelect } from '../context/SelectContext'
-import File from './File'
-import { IProject } from '../types/Index'
-import { gridIcon } from '../assets/svg/GridIcon'
-import { listIcon } from '../assets/svg/ListIcon'
-
-type ViewStyle = 'list' | 'icon';
-
-const columns = ['Name', 'Type', 'Description', 'Year', 'External Link'];
-
 const OpenedFolderMobile = () => {
-  const { doubleClicked, setDoubleClicked } = useSelect()
-  const isMobile = window.innerWidth <= 768;
+  const { doubleClicked, setDoubleClicked, handleDoubleClick } = useSelect()
 
   if (!doubleClicked.folder) return null;
 
@@ -35,13 +24,17 @@ const OpenedFolderMobile = () => {
 
       <div className='icon-content'>
         {doubleClicked.folder?.Files.map((item, index) => (
-          <File
-            {...item}
-            key={index}
-          />
+          <label key={index} className='icon-item'>
+            <h3>{item.name}</h3>
+            {/* <img src={item.image} alt={item.name} /> */}
+            <p>{item.description}</p>
+            <p>{item?.type}</p>
+            <p>{item?.year}</p>
+            <button style={{ display: 'none' }} onClick={() => handleDoubleClick(item)}>Open</button>
+          </label>
         ))}
       </div>
-    </div>
+    </div >
   )
 }
 

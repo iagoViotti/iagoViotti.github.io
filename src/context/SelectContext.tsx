@@ -15,6 +15,8 @@ interface SelectContextType {
   setMousePosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>
   handlePrevFile: () => void;
   handleNextFile: () => void;
+  prevFileIndex: number | null;
+  nextFileIndex: number | null;
 }
 
 const SelectContext = createContext<SelectContextType>(
@@ -39,24 +41,39 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const filesInFolder = doubleClicked.folder?.Files || [];
 
-// Find the index of the current file
-const currentIndex = filesInFolder.findIndex((file) => file.name === doubleClicked?.file?.name);
+  const currentIndex = filesInFolder.findIndex((file) => file.name === doubleClicked?.file?.name);
 
-// Navigation buttons
-const handlePrevFile = () => {
-  if (currentIndex > 0) {
-    const prevFile = filesInFolder[currentIndex - 1];
-    setDoubleClicked({ folder: doubleClicked.folder, file: prevFile });
-  }
-};
+  const prevFileIndex = (currentIndex - 1) >= 0 ? (currentIndex - 1) : null;
+  const nextFileIndex = (currentIndex + 1) < filesInFolder.length ? (currentIndex + 1) : null;
 
-const handleNextFile = () => {
-  if (currentIndex < filesInFolder.length - 1) {
-    const nextFile = filesInFolder[currentIndex + 1];
-    setDoubleClicked({ folder: doubleClicked.folder, file: nextFile });
-  }
-};
-  
+  const handlePrevFile = () => {
+    if (prevFileIndex !== null) {
+      const prevFile = filesInFolder[prevFileIndex];
+      setDoubleClicked({ folder: doubleClicked.folder, file: prevFile });
+    }
+  };
+
+  const handleNextFile = () => {
+    if (nextFileIndex !== null) {
+      const nextFile = filesInFolder[nextFileIndex];
+      setDoubleClicked({ folder: doubleClicked.folder, file: nextFile });
+    }
+  };
+
+  // const handlePrevFile = () => {
+  //   if (currentIndex > 0) {
+  //     const prevFile = filesInFolder[currentIndex - 1];
+  //     setDoubleClicked({ folder: doubleClicked.folder, file: prevFile });
+  //   }
+  // };
+
+  // const handleNextFile = () => {
+  //   if (currentIndex < filesInFolder.length - 1) {
+  //     const nextFile = filesInFolder[currentIndex + 1];
+  //     setDoubleClicked({ folder: doubleClicked.folder, file: nextFile });
+  //   }
+  // };
+
   const handleClick = (window: Window) => {
     setSelected(window.name);
   }
@@ -71,7 +88,7 @@ const handleNextFile = () => {
 
   return (
     <SelectContext.Provider
-      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked, handleClick, doubleClicked, setDoubleClicked, handleDoubleClick, mousePosition, setMousePosition, handlePrevFile, handleNextFile }}
+      value={{ selected, setSelected, lastTimeClicked, setLastTimeClicked, handleClick, doubleClicked, setDoubleClicked, handleDoubleClick, mousePosition, setMousePosition, handlePrevFile, handleNextFile, prevFileIndex, nextFileIndex }}
     >
       {children}
     </SelectContext.Provider>
