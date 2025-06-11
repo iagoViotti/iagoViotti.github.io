@@ -1,29 +1,28 @@
-.canvas-container {
+#app {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.app-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: var(--background);
-  position: fixed;
-  transition: 3s;
 }
 
-.app {
-  height: 400vh;
-  backdrop-filter: blur(100px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  padding-left: 140px;
-  background-color: var(--filter-contrast);
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.page-section {
-  height: 100vh;
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@media screen {
+  @media (max-width: 768px) {
+    .app-background {
+      z-index: -1;
+    }
+  }
 }
-/* 
-#home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */

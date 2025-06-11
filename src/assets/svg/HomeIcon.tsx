@@ -1,11 +1,5 @@
 import React from 'react';
-
-interface IconProps {
-  width?: string;
-  height?: string;
-  fill?: string;
-  stroke?: string;
-}
+import { IconProps } from '../../types/Index';
 
 const Icon: React.FC<IconProps> = ({
   width = '64px',

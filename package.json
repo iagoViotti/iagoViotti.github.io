@@ -11,16 +11,9 @@
     "host": "vite --host"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.1",
-    "@react-three/drei": "^9.111.3",
-    "@types/three": "^0.167.2",
-    "canvas-sketch-util": "^1.10.0",
-    "gsap": "^3.12.5",
-    "lucide-react": "^0.454.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-scroll": "^1.9.0",
-    "three": "^0.167.1"
+    "react-draggable": "^4.4.6"
   },
   "devDependencies": {
     "@types/react": "^18.3.4",

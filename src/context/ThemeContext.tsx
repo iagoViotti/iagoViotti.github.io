@@ -24,7 +24,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     <ThemeContext.Provider
       value={{ theme, setTheme }}
     >
-      <div className={theme}>
+      <div className={theme}
+        style={{
+          height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden'
+        }}>
         {children}
       </div>
     </ThemeContext.Provider>

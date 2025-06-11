@@ -1,13 +1,14 @@
-import { Project } from '../types/Index';
+import { IProject, IFolder } from '../types/Index';
 
-export const mockProjects: Project[] = [
+const projects: IProject[] = [
   {
     name: "Rubber Duck Debugger",
     type: "Web Application",
     description: "Debug your code by explaining it to a rubber duck",
     year: 2024,
     image: "./rubberduck.png",
-    externalLink: "https://rubberduckdebugging.vercel.app/"
+    externalLink: "https://rubberduckdebugging.vercel.app/",
+    mainStack: "React"
   },
   {
     name: "HandCamera Py App",
@@ -15,7 +16,8 @@ export const mockProjects: Project[] = [
     description: "A Python application for hand gesture recognition and snapping photos",
     year: 2025,
     image: "./handsnap.png",
-    externalLink: "https://github.com/iagoViotti/handCameraPy"
+    externalLink: "https://github.com/iagoViotti/handCameraPy",
+    mainStack: "Python"
   },
   {
     name: "NoWaste App",
@@ -23,15 +25,17 @@ export const mockProjects: Project[] = [
     description: "Track and reduce food waste in your kitchen",
     year: 2023,
     image: "./nowasteapp.png",
-    externalLink: "https://github.com/iagoViotti/noWasteApp"
+    externalLink: "https://github.com/iagoViotti/noWasteApp",
+    mainStack: "React"
   },
   {
     name: "Grupo Vitor",
-    type: "Landin Page",
+    type: "Landing Page",
     description: "A Landing page for a paid advertising agency",
     year: 2025,
     image: "./grupovitor.png",
-    externalLink: "https://grupovitor.com.br/"
+    externalLink: "https://grupovitor.com.br/",
+    mainStack: "Wordpress"
   },
   {
     name: "Javascript Creative Coder",
@@ -39,7 +43,8 @@ export const mockProjects: Project[] = [
     description: "A web application to showcase a collection of study purpose canvas artworks",
     year: 2024,
     image: "./creativecoder.png",
-    externalLink: "https://github.com/iagoViotti/creative-coder-domestika-course"
+    externalLink: "https://github.com/iagoViotti/creative-coder-domestika-course",
+    mainStack: "Javascript"
   },
   {
     name: "Vekotec",
@@ -47,7 +52,8 @@ export const mockProjects: Project[] = [
     description: "A web application for an environmental solutions company",
     year: 2022,
     image: "./vekotec.png",
-    externalLink: "https://vekotec.com.br/"
+    externalLink: "https://vekotec.com.br/",
+    mainStack: "React"
   },
   {
     name: "My Portfolio",
@@ -55,7 +61,12 @@ export const mockProjects: Project[] = [
     description: "My personal portfolio to showcase my work",
     year: 2025,
     image: "./portfolio.png",
-    externalLink: ""
+    externalLink: "",
+    mainStack: "React"
   }
 ];
 
+export const portfolio: IFolder = {
+  name: "portfolio",
+  Files: projects,
+}

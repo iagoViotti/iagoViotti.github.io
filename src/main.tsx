@@ -1,18 +1,14 @@
 import ReactDOM from 'react-dom/client'
-import { Provider } from './context/Context'
 import { ThemeProvider } from './context/ThemeContext'
-import Scene from './components/Scene'
-import Aside from './components/Aside'
 import App from './App'
 import './index.css'
 import './App.css'
+import { SelectProvider } from './context/SelectContext'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ThemeProvider>
-    <Provider>
-      <Aside />
-      <Scene />
+    <SelectProvider>
       <App />
-    </Provider>
+    </SelectProvider>
   </ThemeProvider>
 )

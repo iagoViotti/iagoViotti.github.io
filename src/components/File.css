@@ -1,0 +1,29 @@
+.file {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.file:hover {
+  background-color: #cfcfcf80;
+}
+
+.file.selected {
+  border: 1px dashed #000;
+}
+
+.file p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
