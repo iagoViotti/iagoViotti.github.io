@@ -22,7 +22,6 @@ const OpenedFolder = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
   const [shadowStyle, setShadowStyle] = useState({ boxShadow: '0px 0px 0px rgba(0, 0, 0, 0.5)' });
   const [viewStyle, setViewStyle] = useState<ViewStyle>('icon');
-  const isMobile = window.innerWidth <= 768;
 
   const toggleViewStyle = () => {
     setViewStyle(viewStyle === 'icon' ? 'list' : 'icon');
@@ -122,10 +121,10 @@ const OpenedFolder = () => {
             {doubleClicked.folder?.name}
           </div>
           <div className='opened-folder-header-buttons'>
-            {!isMobile && <button onClick={() => toggleViewStyle()}
+            <button onClick={() => toggleViewStyle()}
               className="opened-folder-header-view">
               {viewStyle === 'list' ? gridIcon : listIcon}
-            </button>}
+            </button>
             <button
               onClick={() => { setDoubleClicked({ folder: null, file: null }) }}
               className="opened-folder-header-close"

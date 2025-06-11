@@ -193,13 +193,25 @@
     font-size: 1.2em;
   }
 
-
   .icon-content {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 10px;
-    justify-items: center;
-    align-items: center;
-    overflow: auto;
+    overflow-y: auto;
+  }
+
+  .icon-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .icon-item p {
+    margin: 0;
+  }
+
+  .icon-item h3 {
+    margin: 0;
   }
 }
