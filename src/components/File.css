@@ -11,6 +11,7 @@
   text-align: center;
   user-select: none;
   border: 1px solid transparent;
+  z-index: 1;
 }
 
 .file:hover {

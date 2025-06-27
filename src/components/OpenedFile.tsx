@@ -5,7 +5,9 @@ import { useSelect } from '../context/SelectContext'
 
 const OpenedFile = () => {
   const [isDragging, setIsDragging] = useState(false)
-  const { doubleClicked, setDoubleClicked, handleNextFile, handlePrevFile, prevFileIndex } = useSelect()
+  const { doubleClicked, setDoubleClicked, handleNextFile, handlePrevFile, prevFileIndex, nextFileIndex } = useSelect()
+
+  const isFileInFolder = doubleClicked.folder?.Files.some(file => file.name === doubleClicked.file?.name)
 
   if (!doubleClicked.file) return null;
 
@@ -15,8 +17,12 @@ const OpenedFile = () => {
         <div className="opened-file-header">
           <div className="opened-file-header-title">{doubleClicked.file.name}</div>
           <div className='opened-file-header-buttons'>
-            <button disabled={prevFileIndex === null} onClick={() => handlePrevFile()} >&lt;</button>
-            <button onClick={() => handleNextFile()} >&gt;</button>
+            {isFileInFolder &&
+              <>
+                <button disabled={prevFileIndex === null} onClick={() => handlePrevFile()} >&lt;</button>
+                <button disabled={nextFileIndex === null} onClick={() => handleNextFile()} >&gt;</button>
+              </>
+            }
             <button
               onClick={() => { setDoubleClicked(prev => ({ ...prev, file: null })) }}
               className="opened-folder-header-close"

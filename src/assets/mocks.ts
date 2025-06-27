@@ -70,3 +70,13 @@ export const portfolio: IFolder = {
   name: "portfolio",
   Files: projects,
 }
+
+export const bio: IProject = {
+  name: "bio",
+  type: "Biography",
+  description: "My biography",
+  year: 2025,
+  image: "./bio.png",
+  externalLink: "",
+  mainStack: "Javascript"
+}
