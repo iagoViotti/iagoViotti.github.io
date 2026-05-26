@@ -3,32 +3,19 @@ import Draggable from 'react-draggable'
 import { useState } from 'react'
 import { useSelect } from '../context/SelectContext'
 
-// Importe os templates (que você vai criar na próxima etapa)
-// import ProjectTemplate from './templates/ProjectTemplate'
-import { BioTemplate } from './templates'
-
-// O Mapa de Componentes
-const FileTemplates = {
-  // project: ProjectTemplate,
-  bio: BioTemplate,
-}
-
 const OpenedFile = () => {
   const [isDragging, setIsDragging] = useState(false)
   const { doubleClicked, setDoubleClicked, handleNextFile, handlePrevFile, prevFileIndex, nextFileIndex } = useSelect()
 
-  const file = doubleClicked.file;
+  const isFileInFolder = doubleClicked.folder?.Files.some(file => file.name === doubleClicked.file?.name)
 
-  if (!file) return null;
-
-  const isFileInFolder = doubleClicked.folder?.Files.some(f => f.name === file.name)
-  const TemplateComponent = FileTemplates[file.type as keyof typeof FileTemplates];
+  if (!doubleClicked.file) return null;
 
   return (
     <Draggable bounds={'body'} handle='.opened-file-header' onStart={() => setIsDragging(true)} onStop={() => setIsDragging(false)}>
       <div className={`opened-file ${isDragging ? 'dragging' : ''}`}>
         <div className="opened-file-header">
-          <div className="opened-file-header-title">{file.name}</div>
+          <div className="opened-file-header-title">{doubleClicked.file.name}</div>
           <div className='opened-file-header-buttons'>
             {isFileInFolder &&
               <>
@@ -44,18 +31,13 @@ const OpenedFile = () => {
             </button>
           </div>
         </div>
-
         <div className="opened-file-content">
-          {TemplateComponent ? (
-            <TemplateComponent file={file as any} />
-          ) : (
-            <div style={{ padding: '20px', textAlign: 'center' }}>
-              <p>Tipo de arquivo desconhecido ou não suportado.</p>
-              <p>selected file: {file ? JSON.stringify(file) : ''}</p>
-            </div>
-          )}
+          <p>{doubleClicked.file.description}</p>
+          <p>{doubleClicked.file?.type}</p>
+          <p>{doubleClicked.file?.year}</p>
+          <p>{doubleClicked.file?.externalLink}</p>
+          <img src={doubleClicked.file?.image} alt={doubleClicked.file.name} />
         </div>
-
       </div>
     </Draggable>
   )

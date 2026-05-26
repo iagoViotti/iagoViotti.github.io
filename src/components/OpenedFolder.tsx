@@ -1,18 +1,18 @@
 import './OpenedFolder.css'
 import Draggable from 'react-draggable'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { useSelect } from '../context/SelectContext'
 import File from './File'
-import { IProject } from '../types/Index'
+import { IFile, IProject } from '../types/Index' // Mudei para importar IFile
 import { gridIcon } from '../assets/svg/GridIcon'
 import { listIcon } from '../assets/svg/ListIcon'
 
 type ViewStyle = 'list' | 'icon';
 
-const columns = ['Name', 'Type', 'Description', 'Year', 'External Link'];
+const columns = ['Name', 'Category', 'Description', 'Year', 'External Link'];
 
 const OpenedFolder = () => {
-  const { doubleClicked, setDoubleClicked, selected, handleClick, handleDoubleClick, mousePosition, setMousePosition, setSelected } = useSelect()
+  const { doubleClicked, setDoubleClicked, selected, handleClick, handleDoubleClick } = useSelect()
   const [columnWidths, setColumnWidths] = useState<number[]>([200, 150, 200, 80, 200]);
   const currentColIndex = useRef<number | null>(null);
   const isResizing = useRef(false)
@@ -20,45 +20,12 @@ const OpenedFolder = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [sortParameter, setSortParameter] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
-  const [shadowStyle, setShadowStyle] = useState({ boxShadow: '0px 0px 0px rgba(0, 0, 0, 0.5)' });
+  const [shadowStyle] = useState({ boxShadow: '0px 0px 0px rgba(0, 0, 0, 0.5)' });
   const [viewStyle, setViewStyle] = useState<ViewStyle>('icon');
 
   const toggleViewStyle = () => {
     setViewStyle(viewStyle === 'icon' ? 'list' : 'icon');
   };
-
-  // useEffect(() => {
-  //   const handleMouseMove = (event: MouseEvent) => {
-  //     setMousePosition({ x: event.clientX, y: event.clientY });
-  //   };
-
-  //   document.addEventListener('mousemove', handleMouseMove);
-
-  //   return () => {
-  //     document.removeEventListener('mousemove', handleMouseMove);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   const shadowX = mousePosition.x - (window.innerWidth / 2);
-  //   const shadowY = mousePosition.y - (window.innerHeight / 2);
-  //   setShadowStyle({
-  //     boxShadow: `${shadowX}px ${shadowY}px rgb(0, 0, 0)`,
-  //   });
-
-  //   const folder = document.getElementById('opened-folder');
-  //   const folderTranslateStyleValue = folder ? folder.style.getPropertyValue('transform') : '';
-  //   const translateValue = folderTranslateStyleValue.replace('translate(', '').replace(')', '');
-  //   const translateX = parseFloat(translateValue.split(',')[0]);
-  //   const translateY = parseFloat(translateValue.split(',')[1]);
-  //   const folderCenterX = folder ? (folder.offsetLeft + folder.offsetWidth / 2) - translateX : 0;
-  //   const folderCenterY = folder ? (folder.offsetTop + folder.offsetHeight / 2) - translateY : 0;
-
-  //   console.log(`Mouse Position: (${mousePosition.x}, ${mousePosition.y})
-  //     Folder Center: (${folderCenterX}, ${folderCenterY})
-  //     `);
-
-  // }, [mousePosition]);
 
   const handleMouseDown = (index: number) => {
     isResizing.current = true;
@@ -91,6 +58,7 @@ const OpenedFolder = () => {
     return col ? (col as HTMLElement).getBoundingClientRect().left : 0;
   };
 
+
   const handleSort = (column: string) => {
     if (sortParameter === column) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -100,14 +68,36 @@ const OpenedFolder = () => {
     }
   };
 
-  const sortFunction = (a: IProject, b: IProject) => {
+  // Nova função auxiliar para pegar valores com segurança baseado no tipo do arquivo
+  const getFileProperty = (file: IFile, col: string): string | number => {
+    if (col === 'Name') return file.name;
+
+    // Type Guard para propriedades específicas de IProject
+    if (file.type === 'project') {
+      const project = file as IProject;
+      if (col == 'Category') return project.category
+      if (col === 'Description') return project.description;
+      if (col === 'Year') return project.year;
+      if (col === 'External Link') return project.externalLink || 'N/A';
+    }
+
+    // Fallback para arquivos que não possuem essas colunas (ex: bio)
+    return '-';
+  };
+
+  const sortFunction = (a: IFile, b: IFile) => {
     if (!sortParameter) return 0;
+
+    const valA = getFileProperty(a, sortParameter);
+    const valB = getFileProperty(b, sortParameter);
+
     let comparison = 0;
-    if (sortParameter === 'Name') comparison = a.name.localeCompare(b.name);
-    else if (sortParameter === 'Type') comparison = a.type.localeCompare(b.type);
-    else if (sortParameter === 'Description') comparison = a.description.localeCompare(b.description);
-    else if (sortParameter === 'Year') comparison = a.year - b.year;
-    else if (sortParameter === 'External Link') comparison = a.externalLink.localeCompare(b.externalLink);
+    if (typeof valA === 'string' && typeof valB === 'string') {
+      comparison = valA.localeCompare(valB);
+    } else if (typeof valA === 'number' && typeof valB === 'number') {
+      comparison = valA - valB;
+    }
+
     return sortOrder === 'desc' ? -comparison : comparison;
   };
 
@@ -117,24 +107,15 @@ const OpenedFolder = () => {
     <Draggable bounds={'body'} handle=".opened-folder-header" onStart={() => setIsDragging(true)} onStop={() => setIsDragging(false)}>
       <div id='opened-folder' className={`opened-folder ${isDragging ? 'dragging' : ''}`} style={shadowStyle}>
         <div className="opened-folder-header">
-          <div className="opened-folder-header-title">
-            {doubleClicked.folder?.name}
-          </div>
+          {/* Header se mantém igual */}
+          <div className="opened-folder-header-title">{doubleClicked.folder?.name}</div>
           <div className='opened-folder-header-buttons'>
-            <button onClick={() => toggleViewStyle()}
-              className="opened-folder-header-view">
-              {viewStyle === 'list' ? gridIcon : listIcon}
-            </button>
-            <button
-              onClick={() => { setDoubleClicked({ folder: null, file: null }) }}
-              className="opened-folder-header-close"
-            >
-              X
-            </button>
+            <button onClick={() => toggleViewStyle()}>{viewStyle === 'list' ? gridIcon : listIcon}</button>
+            <button onClick={() => setDoubleClicked({ folder: null, file: null })}>X</button>
           </div>
         </div>
-        {viewStyle === 'list'
-          ?
+
+        {viewStyle === 'list' ? (
           <div className='scrollable-content'>
             <div className='grid-container'>
               <div className="opened-folder-column-header">
@@ -158,66 +139,32 @@ const OpenedFolder = () => {
                   .sort((a, b) => sortFunction(a, b))
                   .map((item, index) => (
                     <div key={item.name} className="opened-folder-content-items">
-                      <div
-                        className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                        onClick={() => handleClick(item)}
-                        onDoubleClick={() => handleDoubleClick(item)}
-                        style={{ width: columnWidths[0] }}>
-                        <p>{item.name}</p>
-                      </div>
-                      <div
-                        className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                        onClick={() => handleClick(item)}
-                        onDoubleClick={() => handleDoubleClick(item)}
-                        style={{ width: columnWidths[1] }}>
-                        <p>{item.type}</p>
-                      </div>
-                      <div
-                        className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                        onClick={() => handleClick(item)}
-                        onDoubleClick={() => handleDoubleClick(item)}
-                        style={{ width: columnWidths[2] }}>
-                        <p>{item.description}</p>
-                      </div>
-                      <div
-                        className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                        onClick={() => handleClick(item)}
-                        onDoubleClick={() => handleDoubleClick(item)}
-                        style={{ width: columnWidths[3] }}>
-                        <p>{item.year}</p>
-                      </div>
-                      <div
-                        className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                        style={{ width: columnWidths[4] }}>
-                        <p>{item.externalLink || 'N/A'}</p>
-                      </div>
+                      {columns.map((col, colIndex) => (
+                        <div
+                          key={colIndex}
+                          className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
+                          onMouseEnter={() => setHoveredIndex(index)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                          onClick={() => handleClick(item)}
+                          onDoubleClick={() => handleDoubleClick(item)}
+                          style={{ width: columnWidths[colIndex] }}>
+                          <p>{getFileProperty(item, col)}</p>
+                        </div>
+                      ))}
                     </div>
                   ))}
               </div>
             </div>
           </div>
-          :
+        ) : (
           <div className='icon-content'>
             {doubleClicked.folder?.Files.map((item, index) => (
-              <File
-                {...item}
-                key={index}
-              />
+              <File {...item} key={index} />
             ))}
           </div>
-        }
+        )}
       </div>
-    </Draggable>
+    </Draggable >
   )
 }
 

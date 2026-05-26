@@ -1,11 +1,38 @@
-interface IProject {
+type FileType = 'project' | 'bio' | 'contact';
+
+type MainStack = 'React' | 'Python' | 'Wordpress' | 'Javascript';
+
+interface IExperience {
   name: string;
-  type: string;
+  period: Date[];
+  attribution: string;
+}
+
+interface IBaseFile {
+  name: string;
+  type: FileType;
+}
+
+interface IProject extends IBaseFile {
+  type: 'project';
+  name: string;
+  category: string;
   description: string;
   year: number;
   image: string;
   externalLink: string;
-  mainStack: MainStack;
+  mainStack: string;
+}
+
+interface IBio extends IBaseFile {
+  type: 'bio';
+  bio: string;
+  status: string;
+  techStack: string[];
+  socialLinks?: string[];
+  professionalExperience: IExperience[];
+  educationalExperience: IExperience[];
+  additionalContent?: string[];
 }
 
 interface IconProps {
@@ -17,11 +44,11 @@ interface IconProps {
 
 interface IFolder {
   name: string;
-  Files: IProject[];
+  Files: IFile[];
 }
 
-type MainStack = 'React' | 'Python' | 'Wordpress' | 'Javascript';
+type IFile = IProject | IBio
 
-type Window = IFolder | IProject
+type Window = IFolder | IFile
 
-export type { IProject, Window, IFolder, MainStack, IconProps };
+export type { IProject, IBio, IFile, Window, IFolder, MainStack, IconProps };

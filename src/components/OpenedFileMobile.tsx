@@ -1,15 +1,26 @@
 import './OpenedFile.css'
 import { useSelect } from '../context/SelectContext'
+// Importe seus templates
+import { BioTemplate } from './templates'
+
+const FileTemplates = {
+  // project: ProjectTemplate,
+  bio: BioTemplate,
+}
 
 const OpenedFileMobile = () => {
   const { doubleClicked, setDoubleClicked, handleNextFile, handlePrevFile } = useSelect()
 
-  if (!doubleClicked.file) return null;
+  const file = doubleClicked.file;
+
+  if (!file) return null;
+
+  const TemplateComponent = FileTemplates[file.type as keyof typeof FileTemplates];
 
   return (
     <div className='opened-file'>
       <div className="opened-file-header">
-        <div className="opened-file-header-title">{doubleClicked.file.name}</div>
+        <div className="opened-file-header-title">{file.name}</div>
         <div className='opened-file-header-buttons'>
           <button onClick={() => handlePrevFile()} >&lt;</button>
           <button onClick={() => handleNextFile()} >&gt;</button>
@@ -21,12 +32,12 @@ const OpenedFileMobile = () => {
           </button>
         </div>
       </div>
-      <div className="opened-file-content">
-        <p>{doubleClicked.file.description}</p>
-        <p>{doubleClicked.file?.type}</p>
-        <p>{doubleClicked.file?.year}</p>
-        <p>{doubleClicked.file?.externalLink}</p>
-        <img src={doubleClicked.file?.image} alt={doubleClicked.file.name} />
+      <div className="opened-file-content" style={{ padding: 0 }}>
+        {TemplateComponent ? (
+          <TemplateComponent file={file as any} />
+        ) : (
+          <div style={{ padding: '20px' }}>Tipo de arquivo não suportado.</div>
+        )}
       </div>
     </div>
   )

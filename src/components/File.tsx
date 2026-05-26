@@ -1,12 +1,12 @@
 import './File.css'
 import { useSelect } from "../context/SelectContext"
 import { fileIcon } from "../assets/svg/FileIcon"
-import { IProject } from "../types/Index"
+import { IFile } from "../types/Index"
 import Draggable from 'react-draggable'
 // import { mapTechIcon } from "../assets/svg/mapTechIcon"
 
-const File = (props: IProject) => {
-  const { name, mainStack } = props
+const File = (props: IFile) => {
+  const { name } = props
   const { selected, handleClick, handleDoubleClick } = useSelect()
 
   const isMobile = window.innerWidth < 768
@@ -19,7 +19,6 @@ const File = (props: IProject) => {
           onClick={() => handleClick(props)}
           onDoubleClick={() => handleDoubleClick(props)}
         >
-          {/* {mapTechIcon[mainStack]} */}
           {fileIcon}
           <p>{name}</p>
         </div>
@@ -32,7 +31,6 @@ const File = (props: IProject) => {
       className={`file ${selected === name ? "selected" : ""}`}
         onClick={() => handleDoubleClick(props)}
     >
-      {/* {mapTechIcon[mainStack]} */}
       {fileIcon}
       <p>{name}</p>
     </div>

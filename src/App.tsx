@@ -72,6 +72,12 @@ const App = () => {
     <div>
       {/* <div className="app-background" onClick={() => handleClick()} /> */}
       <div className="App" id="app">
+        <div className='header'>
+          C:/ POTFOLIO
+          <div className="config">
+            <ThemeButton />
+          </div>
+        </div>
         <div className="grid">
           <h1 className="home-title">iago</h1>
           <div className='main-container'>
@@ -88,9 +94,6 @@ const App = () => {
                 Artista multidisciplinar
               </span>
             </div>
-          </div>
-          <div className="config">
-            <ThemeButton />
           </div>
           <Folder {...portfolio} />
           <File {...bio} />

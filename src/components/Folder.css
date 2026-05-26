@@ -12,7 +12,7 @@
 }
 
 .folder:hover {
-  background-color: #cfcfcf80;
+  background-color: var(--icon-hover-color);
 }
 
 .folder.selected {
