@@ -79,7 +79,7 @@ export const portfolio: IFolder = {
 }
 
 export const bio: IBio = {
-  name: "Biography",
+  name: "bio",
   type: "bio",
   bio: 'This is my biography starting fomthe begining and ending at the finishline',
   status: 'Available',

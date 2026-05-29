@@ -3,13 +3,11 @@ import Draggable from 'react-draggable'
 import { useState } from 'react'
 import { useSelect } from '../context/SelectContext'
 
-// Importe os templates (que você vai criar na próxima etapa)
 // import ProjectTemplate from './templates/ProjectTemplate'
-import { BioTemplate } from './templates'
+import { BioTemplate, ProjectTemplate } from './templates';
 
-// O Mapa de Componentes
 const FileTemplates = {
-  // project: ProjectTemplate,
+  project: ProjectTemplate,
   bio: BioTemplate,
 }
 

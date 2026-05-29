@@ -12,6 +12,10 @@
   user-select: none;
   border: 1px solid transparent;
   z-index: 1;
+  color: var(--text-main);
+  transition: color var(--transition-slow);
+  transition: fill var(--transition-slow);
+  fill: var(--bg-main);
 }
 
 .file:hover {
@@ -19,7 +23,7 @@
 }
 
 .file.selected {
-  border: 1px dashed #000;
+  border: 1px dashed var(--text-main);
 }
 
 .file p {
@@ -27,4 +31,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
+  color: var(--text-main)
+}
+
+.file-icon {
+  box-shadow: 4px 4px var(--border-primary);
 }

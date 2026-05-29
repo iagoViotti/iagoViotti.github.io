@@ -1,30 +1,22 @@
 #app {
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
+  position: relative;
   overflow: hidden;
-}
-
-.app-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--background);
-  /* z-index: -1; */
 }
 
 .header {
   display: flex;
-  background-color: var(--bg-main);
+  background-color: var(--fg-main);
   justify-content: space-between;
   align-items: center;
-  padding: 0.2rem 1rem;
+  padding: 0 1rem;
   border-bottom: var(--border-width-thick) solid var(--border-color);
   box-sizing: border-box;
   font-weight: 700;
   color: var(--text-main);
   transition: var(--transition-slow);
+  height: 48px;
 }
 
 .config {
@@ -35,15 +27,27 @@
   box-sizing: border-box;
   color: var(--primary);
 }
+
 .grid {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  height: calc(100% - 48px);
+}
+
+.main-container {
+  margin-top: auto;
+  padding: 2rem;
 }
 
 .home-title {
   margin: 0;
   font-size: 8rem;
+  color: var(--text-main);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .home-title::after {
@@ -54,13 +58,14 @@
 
 .home-subtitle-container {
   display: flex;
-  align-self: flex-start;
+  align-items: center;
   font-size: 4em;
 }
 
 .home-subtitle {
   font-size: 4rem;
   margin: 0;
+  color: var(--text-main);
 }
 
 .hidden {
@@ -68,7 +73,7 @@
 }
 
 #motion-text {
-  /* color: var(--accent); */
+  color: var(--text-main);
   text-decoration: underline;
 }
 
@@ -79,22 +84,80 @@
   left: 10px;
   font-size: 0.8em;
   font-weight: 900;
+  color: var(--text-main);
 }
 
+.text {
+  color: var(--text-main);
+}
 
-@media screen {
-  @media (max-width: 768px) {
-    .app-background {
-      z-index: -1;
-    }
+/* Container principal que ocupa a tela toda */
+.dot-grid-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-main);
+  /* Fundo escuro */
+  overflow: hidden;
+  transition: var(--transition-slow);
+}
+
+/* Camada Base: Os pontos apagados (escuros) */
+.dot-grid-base {
+  position: absolute;
+  inset: 0;
+  /* Cria os pontinhos usando gradiente radial */
+  background-image: radial-gradient(var(--dot-color) 3px, transparent 3px);
+  background-size: 36px 36px;
+  /* Espaçamento entre os pontos */
+}
+
+/* Camada Ativa: Os pontos acesos (claros) */
+.dot-grid-glow {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--dot-light-color) 3px, transparent 3px);
+  background-size: 36px 36px;
+
+  mask-image: radial-gradient(circle 200px at var(--x, 50%) var(--y, 50%),
+      black 0%,
+      transparent 100%);
+  -webkit-mask-image: radial-gradient(circle 200px at var(--x, 50%) var(--y, 50%),
+      black 0%,
+      transparent 100%);
+}
+
+@media screen and (max-width: 1024px) {
+  .app-background {
+    z-index: -1;
   }
 
-  @media (min-width: 769px) {
-    .home-title {
-      position: absolute;
-      top: 50%;
-      right: 1rem;
-      transform: translatey(-50%);
-    }
+  .grid {
+    height: calc(100% - 48px);
+  }
+
+  .home-subtitle-container {
+    display: none;
+  }
+
+  .home-title {
+    font-size: 1rem;
+    position: initial;
+    transform: translateY(0);
+    margin-top: auto;
+
+  }
+
+  .home-title::after {
+    font-size: 2rem;
+  }
+
+  .main-container {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 10px;
+    padding: 1rem;
   }
 }

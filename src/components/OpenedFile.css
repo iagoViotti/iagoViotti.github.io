@@ -14,7 +14,7 @@
   border: var(--border-width-thick) solid var(--border-primary);
   box-sizing: border-box;
   z-index: 2;
-  background-color: var(--bg-main);
+  background-color: var(--fg-main);
 }
 
 .opened-file-header {
@@ -22,7 +22,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #fee7b3;
+  background-color: var(--secondary-color);
   border-bottom: 2px solid black;
   height: 2.8em;
   box-sizing: border-box;
@@ -36,7 +36,7 @@
 }
 
 .dragging .opened-file-header {
-  background-color: #ecd7a7;
+  background-color: var(--secondary-color-variant-1);
 }
 
 .opened-file-header-buttons button {

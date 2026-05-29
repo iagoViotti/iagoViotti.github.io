@@ -17,6 +17,7 @@ interface IProject extends IBaseFile {
   type: 'project';
   name: string;
   category: string;
+  shortDescription: string;
   description: string;
   year: number;
   image: string;

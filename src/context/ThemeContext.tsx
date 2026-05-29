@@ -1,8 +1,10 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+
+type theme = 'light' | 'dark'
 
 interface ThemeContextType {
-  theme: string;
-  setTheme: (theme: string) => void;
+  theme: theme;
+  setTheme: (theme: theme) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType>(
@@ -18,7 +20,13 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('light' as theme);
+
+  useEffect(() => {
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(theme);
+
+  }, [theme]);
 
   return (
     <ThemeContext.Provider

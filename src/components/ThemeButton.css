@@ -8,7 +8,7 @@
   border: 3px solid;
   border-radius: 50%;
   box-sizing: border-box;
-  background-color: var(--bg-main);
+  background-color: var(--fg-main);
   transition: 0.5s;
   /* border-color: var(--secondary); */
   border-color: var(--border-color);

@@ -9,6 +9,10 @@
   text-align: center;
   user-select: none;
   border: 1px solid transparent;
+  color: var(--text-main);
+  fill: var(--folder-color);
+  transition: color var(--transition-slow);
+  transition: fill var(--transition-slow);
 }
 
 .folder:hover {
@@ -16,5 +20,9 @@
 }
 
 .folder.selected {
-  border: 1px dashed #000;
+  border: 1px dashed var(--text-main);
+}
+
+.folder-icon {
+  box-shadow: 4px 4px var(--border-primary);
 }

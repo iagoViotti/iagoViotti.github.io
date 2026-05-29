@@ -7,9 +7,8 @@ import OpenedFileMobile from "./components/OpenedFileMobile"
 import { useSelect } from "./context/SelectContext"
 import "./App.css"
 import { portfolio, bio } from "./assets/mocks"
-import { createRef, useEffect, useState } from "react"
+import { createRef, useEffect, useState, useRef } from "react"
 import ThemeButton from "./components/ThemeButton"
-
 
 const App = () => {
   const { setSelected } = useSelect()
@@ -19,7 +18,9 @@ const App = () => {
   const [x, setX] = useState(1);
   const [waiting, setWaiting] = useState(false);
   const [visible, setVisible] = useState(true);
+
   const textRef = createRef<HTMLSpanElement>();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const target = textRef.current;
@@ -62,24 +63,40 @@ const App = () => {
     };
   }, [letterCount, waiting, x, words, currentWordIndex]);
 
-  const handleClick = () => {
-    setSelected('none')
-  }
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    containerRef.current.style.setProperty('--x', `${x}px`);
+    containerRef.current.style.setProperty('--y', `${y}px`);
+  };
+
+  // const handleClick = () => {
+  //   setSelected('none')
+  // }
 
   const isMobile = window.innerWidth < 768
 
   return (
-    <div>
-      {/* <div className="app-background" onClick={() => handleClick()} /> */}
-      <div className="App" id="app">
+    <div
+      className="dot-grid-container"
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+    >
+      <div className="dot-grid-base" />
+      <div className="dot-grid-glow" style={{ pointerEvents: 'none' }} />
+      <div className="App" id="app" style={{ position: 'relative', zIndex: 10 }}>
         <div className='header'>
-          C:/ POTFOLIO
+          C:/ PORTFOLIO
           <div className="config">
             <ThemeButton />
           </div>
         </div>
-        <div className="grid">
-          <h1 className="home-title">iago</h1>
+        <div className="grid" id='grid'>
+          <Folder {...portfolio} />
+          <File {...bio} />
           <div className='main-container'>
             <div className="home-subtitle-container">
               <h2 className="home-subtitle">web</h2>
@@ -88,6 +105,7 @@ const App = () => {
                 <span id="console" className={`console-underscore ${visible ? '' : 'hidden'}`}>_</span>
               </div>
             </div>
+            <h1 className="home-title">iago</h1>
             <div className='text' >
               <span>
                 Desenvolvedor Full-stack ✦︎
@@ -95,8 +113,6 @@ const App = () => {
               </span>
             </div>
           </div>
-          <Folder {...portfolio} />
-          <File {...bio} />
         </div>
         {isMobile ? <OpenedFileMobile /> : <OpenedFile />}
         {isMobile ? <OpenedFolderMobile /> : <OpenedFolder />}
