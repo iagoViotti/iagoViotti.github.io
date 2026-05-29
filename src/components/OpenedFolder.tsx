@@ -1,9 +1,9 @@
 import './OpenedFolder.css'
-import Draggable from 'react-draggable'
+import { Rnd } from 'react-rnd'
 import { useRef, useState } from 'react'
 import { useSelect } from '../context/SelectContext'
 import File from './File'
-import { IFile, IProject } from '../types/Index' // Mudei para importar IFile
+import { IFile, IProject } from '../types/Index'
 import { gridIcon } from '../assets/svg/GridIcon'
 import { listIcon } from '../assets/svg/ListIcon'
 
@@ -58,7 +58,6 @@ const OpenedFolder = () => {
     return col ? (col as HTMLElement).getBoundingClientRect().left : 0;
   };
 
-
   const handleSort = (column: string) => {
     if (sortParameter === column) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -68,11 +67,9 @@ const OpenedFolder = () => {
     }
   };
 
-  // Nova função auxiliar para pegar valores com segurança baseado no tipo do arquivo
   const getFileProperty = (file: IFile, col: string): string | number => {
     if (col === 'Name') return file.name;
 
-    // Type Guard para propriedades específicas de IProject
     if (file.type === 'project') {
       const project = file as IProject;
       if (col == 'Category') return project.category
@@ -81,7 +78,6 @@ const OpenedFolder = () => {
       if (col === 'External Link') return project.externalLink || 'N/A';
     }
 
-    // Fallback para arquivos que não possuem essas colunas (ex: bio)
     return '-';
   };
 
@@ -104,10 +100,23 @@ const OpenedFolder = () => {
   if (!doubleClicked.folder) return null;
 
   return (
-    <Draggable bounds={'body'} handle=".opened-folder-header" onStart={() => setIsDragging(true)} onStop={() => setIsDragging(false)}>
-      <div id='opened-folder' className={`opened-folder ${isDragging ? 'dragging' : ''}`} style={shadowStyle}>
+    <Rnd
+      default={{
+        x: Math.max(50, window.innerWidth / 2 - 400),
+        y: Math.max(50, window.innerHeight / 2 - 300),
+        width: 800,
+        height: 500,
+      }}
+      minWidth={500}
+      minHeight={300}
+      bounds="body"
+      dragHandleClassName="opened-folder-header"
+      onDragStart={() => setIsDragging(true)}
+      onDragStop={() => setIsDragging(false)}
+      style={{ zIndex: 90 }} // Folder fica levemente abaixo do File por padrão
+    >
+      <div id='opened-folder' className={`opened-folder ${isDragging ? 'dragging' : ''}`} style={{ ...shadowStyle, width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div className="opened-folder-header">
-          {/* Header se mantém igual */}
           <div className="opened-folder-header-title">{doubleClicked.folder?.name}</div>
           <div className='opened-folder-header-buttons'>
             <button onClick={() => toggleViewStyle()}>{viewStyle === 'list' ? gridIcon : listIcon}</button>
@@ -116,7 +125,7 @@ const OpenedFolder = () => {
         </div>
 
         {viewStyle === 'list' ? (
-          <div className='scrollable-content'>
+          <div className='scrollable-content' style={{ flexGrow: 1, overflow: 'auto' }}>
             <div className='grid-container'>
               <div className="opened-folder-column-header">
                 {columns.map((col, index) => (
@@ -157,14 +166,14 @@ const OpenedFolder = () => {
             </div>
           </div>
         ) : (
-          <div className='icon-content'>
+          <div className='icon-content' style={{ flexGrow: 1, overflow: 'auto' }}>
             {doubleClicked.folder?.Files.map((item, index) => (
               <File {...item} key={index} />
             ))}
           </div>
         )}
       </div>
-    </Draggable >
+    </Rnd >
   )
 }
 

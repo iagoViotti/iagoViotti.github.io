@@ -1,10 +1,5 @@
 .opened-file {
-  position: absolute;
-  top: 140px;
-  left: 300px;
-  width: 1000px;
-  height: 540px;
-  box-shadow: 8px 8px black;
+  box-shadow: 4px 4px var(--border-primary);
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;

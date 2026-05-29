@@ -60,20 +60,6 @@ export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  // const handlePrevFile = () => {
-  //   if (currentIndex > 0) {
-  //     const prevFile = filesInFolder[currentIndex - 1];
-  //     setDoubleClicked({ folder: doubleClicked.folder, file: prevFile });
-  //   }
-  // };
-
-  // const handleNextFile = () => {
-  //   if (currentIndex < filesInFolder.length - 1) {
-  //     const nextFile = filesInFolder[currentIndex + 1];
-  //     setDoubleClicked({ folder: doubleClicked.folder, file: nextFile });
-  //   }
-  // };
-
   const handleClick = (window: Window) => {
     setSelected(window.name);
   }

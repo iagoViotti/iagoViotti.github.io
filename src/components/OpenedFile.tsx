@@ -1,9 +1,8 @@
 import './OpenedFile.css'
-import Draggable from 'react-draggable'
+import { Rnd } from 'react-rnd'
 import { useState } from 'react'
 import { useSelect } from '../context/SelectContext'
 
-// import ProjectTemplate from './templates/ProjectTemplate'
 import { BioTemplate, ProjectTemplate } from './templates';
 
 const FileTemplates = {
@@ -14,6 +13,8 @@ const FileTemplates = {
 const OpenedFile = () => {
   const [isDragging, setIsDragging] = useState(false)
   const { doubleClicked, setDoubleClicked, handleNextFile, handlePrevFile, prevFileIndex, nextFileIndex } = useSelect()
+  const [size, setSize] = useState([1200, 600])
+
 
   const file = doubleClicked.file;
 
@@ -23,8 +24,23 @@ const OpenedFile = () => {
   const TemplateComponent = FileTemplates[file.type as keyof typeof FileTemplates];
 
   return (
-    <Draggable bounds={'body'} handle='.opened-file-header' onStart={() => setIsDragging(true)} onStop={() => setIsDragging(false)}>
-      <div className={`opened-file ${isDragging ? 'dragging' : ''}`}>
+    <Rnd
+      default={{
+        x: (window.innerHeight / 10),
+        y: window.innerWidth / 20,
+        width: size[0],
+        height: size[1],
+      }}
+      minWidth={320}
+      minHeight={400}
+      bounds="body"
+      dragHandleClassName="opened-file-header" // Nota: a classe vai sem o ponto "." aqui
+      onDragStart={() => setIsDragging(true)}
+      onDragStop={() => setIsDragging(false)}
+      style={{ zIndex: 100 }} // Garante que a janela fique por cima
+    >
+      {/* O container interno precisa ter width e height 100% para acompanhar o wrapper do Rnd */}
+      <div className={`opened-file ${isDragging ? 'dragging' : ''}`} style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div className="opened-file-header">
           <div className="opened-file-header-title">{file.name}</div>
           <div className='opened-file-header-buttons'>
@@ -43,7 +59,7 @@ const OpenedFile = () => {
           </div>
         </div>
 
-        <div className="opened-file-content">
+        <div className="opened-file-content" style={{ flexGrow: 1, overflowY: 'auto' }}>
           {TemplateComponent ? (
             <TemplateComponent file={file as any} />
           ) : (
@@ -53,9 +69,8 @@ const OpenedFile = () => {
             </div>
           )}
         </div>
-
       </div>
-    </Draggable>
+    </Rnd>
   )
 }
 
