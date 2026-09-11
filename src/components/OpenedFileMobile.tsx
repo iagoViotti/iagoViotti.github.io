@@ -1,17 +1,25 @@
-import './OpenedFile.css'
+// import './OpenedFile.css'
 import { useSelect } from '../context/SelectContext'
-// Importe seus templates
-import { BioTemplate } from './templates'
+import { IOSWindow } from '../types/Index' // Importação necessária
+import { BioTemplate, ProjectTemplate } from './templates'
 
 const FileTemplates = {
-  // project: ProjectTemplate,
+  project: ProjectTemplate,
   bio: BioTemplate,
 }
 
-const OpenedFileMobile = () => {
-  const { doubleClicked, setDoubleClicked, handleNextFile, handlePrevFile } = useSelect()
+// O componente agora recebe a prop windowData enviada pelo App.tsx
+interface OpenedFileMobileProps {
+  windowData: IOSWindow;
+}
 
-  const file = doubleClicked.file;
+const OpenedFileMobile = ({ windowData }: OpenedFileMobileProps) => {
+  // Puxamos as novas funções de navegação e fechamento do Contexto
+  const { closeWindow, handleNextFile, handlePrevFile, getNavigationIndexes } = useSelect()
+
+  // Extraímos o arquivo diretamente da prop
+  const file = windowData.content as any;
+  const { prev, next } = getNavigationIndexes(windowData.id);
 
   if (!file) return null;
 
@@ -22,10 +30,14 @@ const OpenedFileMobile = () => {
       <div className="opened-file-header">
         <div className="opened-file-header-title">{file.name}</div>
         <div className='opened-file-header-buttons'>
-          <button onClick={() => handlePrevFile()} >&lt;</button>
-          <button onClick={() => handleNextFile()} >&gt;</button>
+          {windowData.parentFolder && (
+            <>
+              <button disabled={prev === null} onClick={() => handlePrevFile(windowData.id)} >&lt;</button>
+              <button disabled={next === null} onClick={() => handleNextFile(windowData.id)} >&gt;</button>
+            </>
+          )}
           <button
-            onClick={() => { setDoubleClicked(prev => ({ ...prev, file: null })) }}
+            onClick={() => closeWindow(windowData.id)}
             className="opened-file-header-close"
           >
             X

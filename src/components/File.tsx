@@ -17,7 +17,7 @@ const File = (props: IFile) => {
         <div
           className={`file ${selected === name ? "selected" : ""}`}
           onClick={() => handleClick(props)}
-          onDoubleClick={() => handleDoubleClick(props)}
+          onDoubleClick={() => handleDoubleClick(props, props.parent)}
         >
           {fileIcon}
           <p>{name}</p>

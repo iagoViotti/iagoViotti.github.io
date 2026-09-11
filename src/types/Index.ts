@@ -11,6 +11,7 @@ interface IExperience {
 interface IBaseFile {
   name: string;
   type: FileType;
+  parent?: IFolder;
 }
 
 interface IProject extends IBaseFile {
@@ -52,4 +53,12 @@ type IFile = IProject | IBio
 
 type Window = IFolder | IFile
 
-export type { IProject, IBio, IFile, Window, IFolder, MainStack, IconProps };
+interface IOSWindow {
+  id: string;
+  type: 'folder' | 'file';
+  content: Window;
+  zIndex: number;
+  parentFolder?: IFolder;
+}
+
+export type { IProject, IBio, IFile, Window, IFolder, MainStack, IconProps, IOSWindow};

@@ -3,16 +3,32 @@ import { Rnd } from 'react-rnd'
 import { useRef, useState } from 'react'
 import { useSelect } from '../context/SelectContext'
 import File from './File'
-import { IFile, IProject } from '../types/Index'
+import { IFile, IProject, IFolder, IOSWindow } from '../types/Index'
 import { gridIcon } from '../assets/svg/GridIcon'
 import { listIcon } from '../assets/svg/ListIcon'
+import { closeIcon } from '../assets/svg/CloseIcon'
 
 type ViewStyle = 'list' | 'icon';
 
 const columns = ['Name', 'Category', 'Description', 'Year', 'External Link'];
 
-const OpenedFolder = () => {
-  const { doubleClicked, setDoubleClicked, selected, handleClick, handleDoubleClick } = useSelect()
+// 1. Definimos a interface das props
+interface OpenedFolderProps {
+  windowData: IOSWindow;
+}
+
+const OpenedFolder = ({ windowData }: OpenedFolderProps) => {
+  const {
+    selected,
+    handleClick,
+    handleDoubleClick,
+    closeWindow,
+    focusWindow
+  } = useSelect()
+
+  // 2. Extraímos o conteúdo da pasta a partir do windowData
+  const folder = windowData.content as IFolder;
+
   const [columnWidths, setColumnWidths] = useState<number[]>([200, 150, 200, 80, 200]);
   const currentColIndex = useRef<number | null>(null);
   const isResizing = useRef(false)
@@ -20,8 +36,10 @@ const OpenedFolder = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [sortParameter, setSortParameter] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
-  const [shadowStyle] = useState({ boxShadow: '0px 0px 0px rgba(0, 0, 0, 0.5)' });
   const [viewStyle, setViewStyle] = useState<ViewStyle>('icon');
+
+  // Um estado simples para definir o tamanho inicial da pasta (um pouco menor que o arquivo ou igual)
+  const [size] = useState([800, 500]);
 
   const toggleViewStyle = () => {
     setViewStyle(viewStyle === 'icon' ? 'list' : 'icon');
@@ -97,15 +115,13 @@ const OpenedFolder = () => {
     return sortOrder === 'desc' ? -comparison : comparison;
   };
 
-  if (!doubleClicked.folder) return null;
-
   return (
     <Rnd
       default={{
-        x: Math.max(50, window.innerWidth / 2 - 400),
-        y: Math.max(50, window.innerHeight / 2 - 300),
-        width: 800,
-        height: 500,
+        x: (window.innerWidth / 10) + 40, // Adicionei um pequeno offset (+40) para não abrir exatamente em cima do arquivo se ambos abrirem juntos
+        y: (window.innerHeight / 20) + 40,
+        width: size[0],
+        height: size[1],
       }}
       minWidth={500}
       minHeight={300}
@@ -113,14 +129,24 @@ const OpenedFolder = () => {
       dragHandleClassName="opened-folder-header"
       onDragStart={() => setIsDragging(true)}
       onDragStop={() => setIsDragging(false)}
-      style={{ zIndex: 90 }} // Folder fica levemente abaixo do File por padrão
+
+      // 3. Aplica o Z-Index e a lógica de foco ao clicar
+      style={{ zIndex: windowData.zIndex }}
+      onMouseDownCapture={() => focusWindow(windowData.id)}
     >
-      <div id='opened-folder' className={`opened-folder ${isDragging ? 'dragging' : ''}`} style={{ ...shadowStyle, width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div id='opened-folder' className={`opened-folder ${isDragging ? 'dragging' : ''}`} style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div className="opened-folder-header">
-          <div className="opened-folder-header-title">{doubleClicked.folder?.name}</div>
+          <div className="opened-folder-header-title">{folder.name}</div>
           <div className='opened-folder-header-buttons'>
             <button onClick={() => toggleViewStyle()}>{viewStyle === 'list' ? gridIcon : listIcon}</button>
-            <button onClick={() => setDoubleClicked({ folder: null, file: null })}>X</button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                closeWindow(windowData.id);
+              }}
+            >
+              {closeIcon}
+            </button>
           </div>
         </div>
 
@@ -144,7 +170,7 @@ const OpenedFolder = () => {
                 ))}
               </div>
               <div className="opened-folder-content-items">
-                {doubleClicked.folder?.Files
+                {folder.Files
                   .sort((a, b) => sortFunction(a, b))
                   .map((item, index) => (
                     <div key={item.name} className="opened-folder-content-items">
@@ -154,8 +180,19 @@ const OpenedFolder = () => {
                           className={`column-item-cell ${hoveredIndex === index ? 'hovered' : ''} ${selected === item.name ? 'selected' : ''}`}
                           onMouseEnter={() => setHoveredIndex(index)}
                           onMouseLeave={() => setHoveredIndex(null)}
-                          onClick={() => handleClick(item)}
-                          onDoubleClick={() => handleDoubleClick(item)}
+
+                          // Lógica de seleção (click simples)
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleClick(item);
+                          }}
+
+                          // 4. Passamos a pasta (folder) como segundo argumento!
+                          onDoubleClick={(e) => {
+                            e.stopPropagation();
+                            handleDoubleClick(item, folder);
+                          }}
+
                           style={{ width: columnWidths[colIndex] }}>
                           <p>{getFileProperty(item, col)}</p>
                         </div>
@@ -167,9 +204,14 @@ const OpenedFolder = () => {
           </div>
         ) : (
           <div className='icon-content' style={{ flexGrow: 1, overflow: 'auto' }}>
-            {doubleClicked.folder?.Files.map((item, index) => (
-              <File {...item} key={index} />
-            ))}
+            {folder.Files.map((item, index) => {
+              const file = {
+                ...item,
+                parent: folder,
+              };
+
+              return <File {...file} key={index} />;
+            })}
           </div>
         )}
       </div>

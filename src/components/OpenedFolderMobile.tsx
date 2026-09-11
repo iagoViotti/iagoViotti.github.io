@@ -1,21 +1,31 @@
-import './OpenedFolder.css'
+// import './OpenedFolder.css'
 import { useSelect } from '../context/SelectContext'
-import { IProject } from '../types/Index';
+import { IFolder, IProject, IOSWindow } from '../types/Index';
 
-const OpenedFolderMobile = () => {
-  const { doubleClicked, setDoubleClicked, handleDoubleClick } = useSelect()
+// O componente agora recebe a prop windowData enviada pelo App.tsx
+interface OpenedFolderMobileProps {
+  windowData: IOSWindow;
+}
 
-  if (!doubleClicked.folder) return null;
+const OpenedFolderMobile = ({ windowData }: OpenedFolderMobileProps) => {
+  // Puxamos a função de fechar e a de clique duplo do Contexto
+  const { handleDoubleClick, closeWindow } = useSelect()
+
+  // Extraímos a pasta diretamente da prop
+  const folder = windowData.content as IFolder;
+
+  if (!folder) return null;
 
   return (
     <div id='opened-folder' className='opened-folder'>
       <div className="opened-folder-header">
         <div className="opened-folder-header-title">
-          {doubleClicked.folder?.name}
+          {folder.name}
         </div>
         <div className='opened-folder-header-buttons'>
           <button
-            onClick={() => { setDoubleClicked({ folder: null, file: null }) }}
+            // Substituímos o setDoubleClicked pela função closeWindow
+            onClick={() => closeWindow(windowData.id)}
             className="opened-folder-header-close"
           >
             X
@@ -24,7 +34,7 @@ const OpenedFolderMobile = () => {
       </div>
 
       <div className='icon-content'>
-        {doubleClicked.folder?.Files.map((item, index) => {
+        {folder.Files.map((item, index) => {
           // Checagem de tipo para extrair dados específicos se for projeto
           const isProject = item.type === 'project';
           const projectData = isProject ? (item as IProject) : null;
@@ -37,7 +47,8 @@ const OpenedFolderMobile = () => {
               <p>{item.type}</p>
               {isProject && <p>{projectData?.year}</p>}
 
-              <button style={{ display: 'none' }} onClick={() => handleDoubleClick(item)}>Open</button>
+              {/* O botão hidden repassa a bola para o handleDoubleClick, enviando a pasta atual junto */}
+              <button style={{ display: 'none' }} onClick={() => handleDoubleClick(item, folder)}>Open</button>
             </label>
           )
         })}

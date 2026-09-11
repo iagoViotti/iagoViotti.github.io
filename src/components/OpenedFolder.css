@@ -1,15 +1,13 @@
 .opened-folder {
-  border: 1px solid #ccc;
-  background-color: var(--bg-main);
-  box-shadow: 8px 8px black;
+  border: var(--border-width-thick) solid var(--border-primary);
+  background-color: var(--fg-main);
+  box-shadow: 4px 4px var(--border-primary);
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* border: 2px solid #b9b9b9; */
-  border: 3px solid black;
   box-sizing: border-box;
   z-index: 1;
 }
@@ -19,8 +17,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #fee7b3;
-  border-bottom: 2px solid black;
+  background-color: var(--folder-color);
+  border-bottom: var(--border-width-thick) solid black;
   height: 2.8em;
   box-sizing: border-box;
 }
@@ -28,22 +26,36 @@
 .opened-folder-header-title {
   font-size: 1.2em;
   font-weight: 500;
-  /* border: 1px solid red; */
   box-sizing: border-box;
 }
 
 .dragging .opened-folder-header {
-  background-color: #ecd7a7;
+  background-color: var(--folder-color-variant-1);
 }
 
-.opened-folder-header-close {
+.opened-folder-header-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.opened-folder-header-buttons button {
   cursor: pointer;
-  background-color: #f1f1f1;
-  border: 2px solid black;
-  font-size: 1em;
-  color: black;
-  font-weight: bolder;
-  padding: 2px 6px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.8em;
+  height: 1.8em;
+  border: none;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.opened-folder-header-buttons button:nth-child(1) {
+  border: var(--border-width-thin) solid var(--border-primary);
 }
 
 .opened-folder-header-view {
@@ -181,6 +193,7 @@
     top: 0;
     left: 0;
     box-shadow: none;
+    position: absolute;
   }
 
   .opened-folder-header-close {

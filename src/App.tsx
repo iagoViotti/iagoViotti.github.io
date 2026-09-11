@@ -11,7 +11,7 @@ import { createRef, useEffect, useState, useRef } from "react"
 import ThemeButton from "./components/ThemeButton"
 
 const App = () => {
-  const { setSelected } = useSelect()
+  const { setSelected, openWindows } = useSelect()
   const [words] = useState(['Developer', 'Designer', 'Artist']);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [letterCount, setLetterCount] = useState(1);
@@ -114,8 +114,21 @@ const App = () => {
             </div>
           </div>
         </div>
-        {isMobile ? <OpenedFileMobile /> : <OpenedFile />}
-        {isMobile ? <OpenedFolderMobile /> : <OpenedFolder />}
+        {openWindows.map((win) => {
+          if (win.type === 'folder') {
+            return isMobile ? (
+              <OpenedFolderMobile key={win.id} windowData={win} />
+            ) : (
+              <OpenedFolder key={win.id} windowData={win} />
+            )
+          } else {
+            return isMobile ? (
+              <OpenedFileMobile key={win.id} windowData={win} />
+            ) : (
+              <OpenedFile key={win.id} windowData={win} />
+            )
+          }
+        })}
       </div>
     </div>
   )

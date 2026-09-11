@@ -2,6 +2,8 @@ import './OpenedFile.css'
 import { Rnd } from 'react-rnd'
 import { useState } from 'react'
 import { useSelect } from '../context/SelectContext'
+import { IOSWindow } from '../types/Index'
+import { closeIcon } from '../assets/svg/CloseIcon'
 
 import { BioTemplate, ProjectTemplate } from './templates';
 
@@ -10,51 +12,54 @@ const FileTemplates = {
   bio: BioTemplate,
 }
 
-const OpenedFile = () => {
+// 1. Definimos a interface das props
+interface OpenedFileProps {
+  windowData: IOSWindow;
+}
+
+const OpenedFile = ({ windowData }: OpenedFileProps) => {
   const [isDragging, setIsDragging] = useState(false)
-  const { doubleClicked, setDoubleClicked, handleNextFile, handlePrevFile, prevFileIndex, nextFileIndex } = useSelect()
-  const [size, setSize] = useState([1200, 600])
-
-
-  const file = doubleClicked.file;
-
-  if (!file) return null;
-
-  const isFileInFolder = doubleClicked.folder?.Files.some(f => f.name === file.name)
+  const { closeWindow, focusWindow, handleNextFile, handlePrevFile, getNavigationIndexes } = useSelect()
+  const file = windowData.content as any;
+  const { prev, next } = getNavigationIndexes(windowData.id);
   const TemplateComponent = FileTemplates[file.type as keyof typeof FileTemplates];
+  const [size, _setSize] = useState([1200, 600])
 
   return (
     <Rnd
       default={{
-        x: (window.innerHeight / 10),
-        y: window.innerWidth / 20,
+        x: (window.innerWidth / 10),
+        y: window.innerHeight / 20,
         width: size[0],
         height: size[1],
       }}
       minWidth={320}
       minHeight={400}
       bounds="body"
-      dragHandleClassName="opened-file-header" // Nota: a classe vai sem o ponto "." aqui
+      dragHandleClassName="opened-file-header"
       onDragStart={() => setIsDragging(true)}
       onDragStop={() => setIsDragging(false)}
-      style={{ zIndex: 100 }} // Garante que a janela fique por cima
+      style={{ zIndex: windowData.zIndex }}
+      onMouseDownCapture={() => focusWindow(windowData.id)}
     >
-      {/* O container interno precisa ter width e height 100% para acompanhar o wrapper do Rnd */}
       <div className={`opened-file ${isDragging ? 'dragging' : ''}`} style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div className="opened-file-header">
           <div className="opened-file-header-title">{file.name}</div>
           <div className='opened-file-header-buttons'>
-            {isFileInFolder &&
+            {windowData.parentFolder && (
               <>
-                <button disabled={prevFileIndex === null} onClick={() => handlePrevFile()} >&lt;</button>
-                <button disabled={nextFileIndex === null} onClick={() => handleNextFile()} >&gt;</button>
+                <button disabled={prev === null} onClick={() => handlePrevFile(windowData.id)}>&lt;</button>
+                <button disabled={next === null} onClick={() => handleNextFile(windowData.id)}>&gt;</button>
               </>
-            }
+            )}
             <button
-              onClick={() => { setDoubleClicked(prev => ({ ...prev, file: null })) }}
-              className="opened-folder-header-close"
+              onClick={(e) => {
+                e.stopPropagation();
+                closeWindow(windowData.id);
+              }}
+              className="opened-file-header-close"
             >
-              X
+              {closeIcon}
             </button>
           </div>
         </div>

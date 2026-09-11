@@ -9,7 +9,8 @@ const projects: IProject[] = [
     image: "./rubberduck.png",
     externalLink: "https://rubberduckdebugging.vercel.app/",
     mainStack: "React",
-    type: 'project'
+    type: 'project',
+    shortDescription: '',
   },
   {
     name: "HandCamera Py App",
@@ -19,7 +20,8 @@ const projects: IProject[] = [
     image: "./handsnap.png",
     externalLink: "https://github.com/iagoViotti/handCameraPy",
     mainStack: "Python",
-    type: 'project'
+    type: 'project',
+    shortDescription: ''
   },
   {
     name: "NoWaste App",
@@ -29,7 +31,8 @@ const projects: IProject[] = [
     image: "./nowasteapp.png",
     externalLink: "https://github.com/iagoViotti/noWasteApp",
     mainStack: "React",
-    type: 'project'
+    type: 'project',
+    shortDescription: ''
   },
   {
     name: "Grupo Vitor",
@@ -39,7 +42,8 @@ const projects: IProject[] = [
     image: "./grupovitor.png",
     externalLink: "https://grupovitor.com.br/",
     mainStack: "Wordpress",
-    type: 'project'
+    type: 'project',
+    shortDescription: ''
   },
   {
     name: "Javascript Creative Coder",
@@ -49,7 +53,8 @@ const projects: IProject[] = [
     image: "./creativecoder.png",
     externalLink: "https://github.com/iagoViotti/creative-coder-domestika-course",
     mainStack: "Javascript",
-    type: 'project'
+    type: 'project',
+    shortDescription: ''
   },
   {
     name: "Vekotec",
@@ -59,7 +64,8 @@ const projects: IProject[] = [
     image: "./vekotec.png",
     externalLink: "https://vekotec.com.br/",
     mainStack: "React",
-    type: 'project'
+    type: 'project',
+    shortDescription: ''
   },
   {
     name: "My Portfolio",
@@ -69,7 +75,8 @@ const projects: IProject[] = [
     image: "./portfolio.png",
     externalLink: "",
     mainStack: "React",
-    type: 'project'
+    type: 'project',
+    shortDescription: ''
   }
 ];
 
